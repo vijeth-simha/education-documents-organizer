@@ -1,0 +1,24 @@
+{
+  "name": "education-documents-organizer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vijeth-simha/education-documents-organizer.git"
+  },
+  "keywords": [
+    "education",
+    "document",
+    "saver"
+  ],
+  "author": "Vijeth Simha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vijeth-simha/education-documents-organizer/issues"
+  },
+  "homepage": "https://github.com/vijeth-simha/education-documents-organizer#readme"
+}
