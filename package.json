@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/vijeth-simha/education-documents-organizer/issues"
   },
-  "homepage": "https://github.com/vijeth-simha/education-documents-organizer#readme"
+  "homepage": "https://github.com/vijeth-simha/education-documents-organizer#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
