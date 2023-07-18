@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import "reflect-metadata";
 import { hostname, port } from "./constants/constants";
+require('dotenv').config();
 
 var expressLayouts = require("express-ejs-layouts");
 const path = require("path");
