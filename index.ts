@@ -6,7 +6,6 @@ import { AppDataSource } from "./db";
 
 
 var expressLayouts = require("express-ejs-layouts");
-const path = require("path");
 var cors = require("cors");
 
 const app: Express = express();
