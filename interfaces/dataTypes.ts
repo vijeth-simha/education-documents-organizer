@@ -7,3 +7,10 @@ export default interface StatusCode {
   forbidden: number;
   invalid: number;
 }
+
+export interface Error {
+  errno: number;
+  code: string;
+  sqlState: string;
+  name: string;
+}
