@@ -1,4 +1,1 @@
-import { Request,Response, Router } from "express";
-
-
-const authController = require("../")
+export {default as AuthRoutes} from './auth/auth';

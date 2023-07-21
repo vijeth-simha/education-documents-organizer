@@ -1,9 +1,9 @@
 import express, { Express } from "express";
 import "reflect-metadata";
 import { hostname, port } from "./constants/constants";
-require('dotenv').config();
+require("dotenv").config();
 import { AppDataSource } from "./db";
-
+import { AuthRoutes } from "./routes/api";
 
 var expressLayouts = require("express-ejs-layouts");
 var cors = require("cors");
@@ -20,6 +20,10 @@ app.use(cors(corsOptions));
 app.set("views", "./views");
 app.set("view engine", "ejs");
 app.use(expressLayouts);
+
+
+
+app.use("/api/auth", AuthRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
