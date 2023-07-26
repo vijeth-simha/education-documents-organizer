@@ -1,17 +1,17 @@
-import express, { Express } from "express";
+import express, { Express, Request, Response } from "express";
 import "reflect-metadata";
 import { hostname, port } from "./constants/constants";
 require("dotenv").config();
 import { AppDataSource } from "./db";
 import { AuthRoutes } from "./routes/api";
 
-var expressLayouts = require("express-ejs-layouts");
-var cors = require("cors");
+const expressLayouts = require("express-ejs-layouts");
+const cors = require("cors");
+const path = require("path");
 
 const app: Express = express();
 app.use(express.json());
-
-var corsOptions = {
+const corsOptions = {
   origin: "http://localhost:3000",
   optionsSuccessStatus: 200,
 };
@@ -21,6 +21,16 @@ app.set("views", "./views");
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 
+app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+app.get("/", (req: Request, res: Response) => {
+  // res.send("hello + TypeScript Server");
+  res.render("pages/login");
+});
 
 
 app.use("/api/auth", AuthRoutes);
