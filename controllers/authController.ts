@@ -31,6 +31,8 @@ const handleNewUserRegistrarion = async (userObjeect: User, res: Response) => {
       }
     } catch (error) {
       const errorNumber: number = (error as Error).errno;
+      console.log(error);
+      
       if(errorNumber===STATUS_CODES.duplicate) {
         res.status(STATUS_CODES.duplicate).send("User aleady exists");
       }
