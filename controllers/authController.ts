@@ -30,11 +30,11 @@ const handleNewUserRegistrarion = async (userObjeect: User, res: Response) => {
         res.status(STATUS_CODES.duplicate).send("User aleady exists");
       }
     } catch (error) {
-      const errorNumber: number = (error as Error).errno;
-      console.log(error);
-      
+      const errorNumber: number = (error as Error).errno;      
       if(errorNumber===STATUS_CODES.duplicate) {
         res.status(STATUS_CODES.duplicate).send("User aleady exists");
+      } else {
+        res.status(STATUS_CODES.error).send("Internal server error");
       }
     }
   };
@@ -45,8 +45,8 @@ const handleNewUserRegistrarion = async (userObjeect: User, res: Response) => {
       handleNewUserRegistrarion(req.body, res);
     } else {
       res
-        .status(STATUS_CODES.error)
-        .send("Please have a valid email and password");
+        .status(STATUS_CODES.invalid)
+        .send("Please enter a valid email and password");
     }
   };
   
