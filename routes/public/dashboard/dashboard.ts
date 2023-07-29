@@ -2,7 +2,7 @@ import { Request, Response, Router } from "express";
 
 const DashboardRoutes = Router();
 
-DashboardRoutes.get("/dashboard", (req: Request, res: Response) => {
+DashboardRoutes.get("/", (req: Request, res: Response) => {
   res.render("pages/dashboard");
 });
 
