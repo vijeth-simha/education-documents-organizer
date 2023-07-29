@@ -18,4 +18,7 @@ export default class Category {
 
   @Column()
   categoryPic: string;
+
+  @Column()
+  shortDescription: string;
 }
