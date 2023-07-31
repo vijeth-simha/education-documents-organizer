@@ -1,1 +1,1 @@
-export {default as StatusCode, Error} from "./dataTypes"
+export {default as StatusCode, Error,FileType,MulterRequest} from "./dataTypes"
