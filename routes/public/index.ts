@@ -1,2 +1,2 @@
 export {default as DashboardRoutes} from './dashboard/dashboard';
-export {default as CategoryRoutes} from './category/category';
+export {default as CategoryPublicRoutes} from './category/category';

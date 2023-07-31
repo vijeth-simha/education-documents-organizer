@@ -4,7 +4,8 @@ import { hostname, port } from "./constants/constants";
 require("dotenv").config();
 import { AppDataSource } from "./db";
 import { AuthRoutes } from "./routes/api";
-import { DashboardRoutes,CategoryRoutes } from "./routes/public";
+import { DashboardRoutes,CategoryPublicRoutes } from "./routes/public";
+import CategoryAPIRoutes from "./routes/api/category/category";
 
 const expressLayouts = require("express-ejs-layouts");
 const cors = require("cors");
@@ -34,11 +35,12 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 
-app.use("/api/auth", AuthRoutes);
+app.use("/api/v1/auth", AuthRoutes);
+app.use("/api/v1/category", CategoryAPIRoutes);
 
 
 app.use("/dashboard", DashboardRoutes);
-app.use("/category", CategoryRoutes);
+app.use("/category", CategoryPublicRoutes);
 
 
 app.listen(port, () => {
