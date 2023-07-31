@@ -4,7 +4,7 @@ import { hostname, port } from "./constants/constants";
 require("dotenv").config();
 import { AppDataSource } from "./db";
 import { AuthRoutes } from "./routes/api";
-import { DashboardRoutes } from "./routes/public";
+import { DashboardRoutes,CategoryRoutes } from "./routes/public";
 
 const expressLayouts = require("express-ejs-layouts");
 const cors = require("cors");
@@ -38,6 +38,7 @@ app.use("/api/auth", AuthRoutes);
 
 
 app.use("/dashboard", DashboardRoutes);
+app.use("/category", CategoryRoutes);
 
 
 app.listen(port, () => {
