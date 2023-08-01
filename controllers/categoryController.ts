@@ -19,6 +19,17 @@ const createCategory = async (req: Request, res: Response) => {
   }
 };
 
+const getAllCategories = async(req:Request,res:Response)=> {
+  const categoryRepository = AppDataSource.getRepository(Category);
+  try {
+    const categories:Category[] = await categoryRepository.find();
+    res.status(STATUS_CODES.success).send(categories);
+  } catch (error) {
+    res.status(STATUS_CODES.error).send("Internal Server Error");
+  }
+}
+
 module.exports = {
   createCategory,
+  getAllCategories
 };

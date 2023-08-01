@@ -25,4 +25,11 @@ CategoryAPIRoutes.post(
   categoryController.createCategory
 );
 
+
+CategoryAPIRoutes.get(
+  "/get-all-categories",
+  verifyAccessToken,
+  categoryController.getAllCategories
+);
+
 export default CategoryAPIRoutes;
