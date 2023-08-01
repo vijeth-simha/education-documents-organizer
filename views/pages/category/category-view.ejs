@@ -47,7 +47,7 @@
                       <td><img class="img-profile rounded-circle custom-img"
                         src="../img/category-images/<%- category.categoryPic %>"></td>
                       <td><%- category.title %></td>
-                      <td><%- category.createdAt %></td>
+                      <td><%- category.createdAt.toLocaleDateString() %></td>
                       <td><%- category.shortDescription %></td>
                     </tr>
                     <%})%> <% } %>
