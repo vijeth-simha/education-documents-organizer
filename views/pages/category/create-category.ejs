@@ -93,8 +93,9 @@
       const formElement = document.querySelector("#categoryForm");
       const formData = new FormData(formElement);
       postCategoryData(formData).then(async (response) => {
-        console.log(response);
-        // window.location.href = "/category";
+        if (response.status === 200) {
+          window.location.href = "/category";
+        }
       });
     };
 
