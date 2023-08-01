@@ -1,9 +1,13 @@
 import { Request, Response, Router } from "express";
+import { AppDataSource } from "../../../db";
+import { Category } from "../../../models";
 
 const CategoryPublicRoutes = Router();
 
-CategoryPublicRoutes.get("/", (req: Request, res: Response) => {
-  res.render("pages/category/category-view");
+CategoryPublicRoutes.get("/",async (req: Request, res: Response) => {
+  const categoryRepository = AppDataSource.getRepository(Category);
+  const categories:Category[] = await categoryRepository.find();
+  res.render("pages/category/category-view",{categories});
 });
 
 

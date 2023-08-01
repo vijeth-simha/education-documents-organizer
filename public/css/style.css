@@ -19,3 +19,7 @@ input[type="file"]::file-selector-button {
   input[type="file"]::file-selector-button:active {
     background-color: #e5e7eb;
   }
+
+  .custom-img {
+    width: 50px;
+  }
