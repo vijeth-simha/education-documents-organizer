@@ -15,6 +15,7 @@ const createCategory = async (req: Request, res: Response) => {
     await categoryRepository.save(categoryObject);
     res.status(STATUS_CODES.success).send("Category created successfully");
   } catch (error) {
+    console.log(error);
     res.status(STATUS_CODES.error).send("Internal Server Error");
   }
 };
@@ -24,7 +25,7 @@ const getAllCategories = async(req:Request,res:Response)=> {
   try {
     const categories:Category[] = await categoryRepository.find();
     res.status(STATUS_CODES.success).send(categories);
-  } catch (error) {
+  } catch (error) {    
     res.status(STATUS_CODES.error).send("Internal Server Error");
   }
 }
