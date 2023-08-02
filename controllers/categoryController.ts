@@ -30,7 +30,20 @@ const getAllCategories = async(req:Request,res:Response)=> {
   }
 }
 
+
+const deleteCategory = async (req: Request, res: Response) => {
+  const categoryRepository = AppDataSource.getRepository(Category);
+  const { id } = req.params;
+  try {
+    await categoryRepository.delete(Number(id));
+    res.status(STATUS_CODES.success).send("Category Deleted Successfully");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createCategory,
-  getAllCategories
+  getAllCategories,
+  deleteCategory
 };

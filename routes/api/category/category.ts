@@ -32,4 +32,11 @@ CategoryAPIRoutes.get(
   categoryController.getAllCategories
 );
 
+CategoryAPIRoutes.delete(
+  "/delete-category/:id",
+  verifyAccessToken,
+  categoryController.deleteCategory
+);
+
+
 export default CategoryAPIRoutes;
