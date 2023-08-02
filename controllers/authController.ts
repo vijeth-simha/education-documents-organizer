@@ -61,8 +61,8 @@ const handleNewUserRegistrarion = async (userObjeect: User, res: Response) => {
       if (isPasswordMatched) {
         const accessToken: string = await getAccessToken(user.id);
         const refreshToken: string = await getRefreshToken(user.id);
-  
-        res.status(STATUS_CODES.success).send({ accessToken, refreshToken });
+        const userFullName:string = user.firstName+' '+user.lastName
+        res.status(STATUS_CODES.success).send({ accessToken, refreshToken,userFullName });
       } else {
         res.status(STATUS_CODES.notFound).send("Invalid email/password");
       }
