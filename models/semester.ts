@@ -12,9 +12,11 @@ export default class Semester {
   shortDesction: string;
 
   @Column()
-  createdAt: Date
+  createdAt: Date;
 
   @Column()
-  updatedAt: Date
-  
+  updatedAt: Date;
+
+  @Column()
+  semesterPic: string;
 }
