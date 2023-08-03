@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToOne } from "typeorm";
 import Category from "./category";
 
 @Entity()
@@ -21,6 +21,8 @@ export default class Semester {
   @Column()
   semesterPic: string;
 
-  // @OneToMany(()=>Category,)
+  @OneToOne(()=>Category)
+  @JoinColumn()
+  category:Category
 
 }

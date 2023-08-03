@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm";
 import { Category, User } from "./models";
+import Semester from "./models/semester";
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -10,5 +11,5 @@ export const AppDataSource = new DataSource({
     database: process.env.DATABASE_NAME,
     synchronize: true,
     logging: false,
-    entities: [User,Category],
+    entities: [User,Category,Semester],
   });
