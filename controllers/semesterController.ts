@@ -31,19 +31,20 @@ const createSemeter = async (req: Request, res: Response) => {
   }
   
   
-//   const deleteCategory = async (req: Request, res: Response) => {
-//     const categoryRepository = AppDataSource.getRepository(Category);
-//     const { id } = req.params;
-//     try {
-//       await categoryRepository.delete(Number(id));
-//       res.status(STATUS_CODES.success).send("Category Deleted Successfully");
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+  const deleteSemester = async (req: Request, res: Response) => {
+    const semesterRepository = AppDataSource.getRepository(Semester);
+    const { id } = req.params;
+    try {
+      await semesterRepository.delete(Number(id));
+      res.status(STATUS_CODES.success).send("Semester Deleted Successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
 module.exports={
     createSemeter,
-    getAllSemesters
+    getAllSemesters,
+    deleteSemester
 }
