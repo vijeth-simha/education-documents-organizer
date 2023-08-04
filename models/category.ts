@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import Semester from "./semester";
 
 @Entity()
 export default class Category {
@@ -21,4 +22,7 @@ export default class Category {
 
   @Column()
   shortDescription: string;
+
+  @OneToMany(() => Semester, (semester) => semester.category)
+  semester: Semester[];
 }

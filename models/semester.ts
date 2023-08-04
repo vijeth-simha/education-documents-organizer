@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToOne } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 import Category from "./category";
 
 @Entity()
@@ -16,17 +16,15 @@ export default class Semester {
   createdAt: Date;
 
   @Column({
-    nullable:true
+    nullable: true,
   })
   updatedAt: Date;
 
   @Column({
-    nullable:true
+    nullable: true,
   })
   semesterPic: string;
 
-  @OneToOne(()=>Category)
-  @JoinColumn()
-  category:Category
-
+  @ManyToOne(() => Category, (category) => category.semester)
+  category: string;
 }
