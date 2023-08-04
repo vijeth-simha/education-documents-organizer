@@ -10,15 +10,19 @@ export default class Semester {
   title: string;
 
   @Column()
-  shortDesction: string;
+  shortDescription: string;
 
   @Column()
   createdAt: Date;
 
-  @Column()
+  @Column({
+    nullable:true
+  })
   updatedAt: Date;
 
-  @Column()
+  @Column({
+    nullable:true
+  })
   semesterPic: string;
 
   @OneToOne(()=>Category)

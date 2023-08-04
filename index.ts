@@ -3,9 +3,9 @@ import "reflect-metadata";
 import { hostname, port } from "./constants/constants";
 require("dotenv").config();
 import { AppDataSource } from "./db";
-import { AuthRoutes } from "./routes/api";
+import { AuthRoutes, CategoryAPIRoutes, SemesterAPIRoutes } from "./routes/api";
 import { DashboardRoutes,CategoryPublicRoutes } from "./routes/public";
-import CategoryAPIRoutes from "./routes/api/category/category";
+
 
 const expressLayouts = require("express-ejs-layouts");
 const cors = require("cors");
@@ -37,6 +37,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/api/v1/auth", AuthRoutes);
 app.use("/api/v1/category", CategoryAPIRoutes);
+app.use("/api/v1/semester", SemesterAPIRoutes);
 
 
 app.use("/dashboard", DashboardRoutes);

@@ -3,25 +3,25 @@ import { FileType } from "../../../interfaces";
 const { verifyAccessToken } = require("../../../helpers/JWTHelperUtils");
 const semesterController = require("../../../controllers/semesterController");
 
-const CategoryAPIRoutes = Router();
+const SemesterAPIRoutes = Router();
 
-const multer = require("multer");
-const storage = multer.diskStorage({
-  destination: (req: Request, file: File, cb: any) => {
-    cb(null, "./public/img/category-images");
-  },
-  filename: function (req: Request, file: FileType, cb: any) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + "-" + file.originalname);
-  },
-});
-const upload = multer({ storage: storage });
+// const multer = require("multer");
+// const storage = multer.diskStorage({
+//   destination: (req: Request, file: File, cb: any) => {
+//     cb(null, "./public/img/semester-images");
+//   },
+//   filename: function (req: Request, file: FileType, cb: any) {
+//     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+//     cb(null, uniqueSuffix + "-" + file.originalname);
+//   },
+// });
+// const upload = multer({ storage: storage });
 
-CategoryAPIRoutes.post(
+SemesterAPIRoutes.post(
   "/create-semester",
   verifyAccessToken,
-  upload.single("semesterPicsemesterPic"),
+  // upload.single("semesterPic"),
   semesterController.createSemester
 );
 
-export default CategoryAPIRoutes;
+export default SemesterAPIRoutes;
