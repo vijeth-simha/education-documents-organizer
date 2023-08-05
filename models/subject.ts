@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
 import Semester from "./semester";
+import Lesson from "./lesson";
 
 @Entity()
 export default class Subject {
@@ -23,4 +24,7 @@ export default class Subject {
 
   @ManyToOne(()=>Semester,(semester)=>semester.subject)
   semester: string;
+
+  @OneToMany(()=>Lesson,(lesson)=>lesson.subject)
+  lesson: Lesson[]
 }
