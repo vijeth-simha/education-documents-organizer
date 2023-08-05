@@ -3,9 +3,13 @@ import "reflect-metadata";
 import { hostname, port } from "./constants/constants";
 require("dotenv").config();
 import { AppDataSource } from "./db";
-import { AuthRoutes, CategoryAPIRoutes, SemesterAPIRoutes } from "./routes/api";
-import { DashboardRoutes,CategoryPublicRoutes } from "./routes/public";
-
+import {
+  AuthRoutes,
+  CategoryAPIRoutes,
+  SemesterAPIRoutes,
+  SubjectAPIRoutes,
+} from "./routes/api";
+import { DashboardRoutes, CategoryPublicRoutes } from "./routes/public";
 
 const expressLayouts = require("express-ejs-layouts");
 const cors = require("cors");
@@ -25,24 +29,20 @@ app.use(expressLayouts);
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req: Request, res: Response) => {
   // res.send("hello + TypeScript Server");
   res.render("pages/login");
 });
 
-
 app.use("/api/v1/auth", AuthRoutes);
 app.use("/api/v1/category", CategoryAPIRoutes);
 app.use("/api/v1/semester", SemesterAPIRoutes);
-
+app.use("/api/v1/subject", SubjectAPIRoutes);
 
 app.use("/dashboard", DashboardRoutes);
 app.use("/category", CategoryPublicRoutes);
-
 
 app.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
