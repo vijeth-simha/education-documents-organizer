@@ -24,4 +24,10 @@ SemesterAPIRoutes.post(
   semesterController.createSemester
 );
 
+SemesterAPIRoutes.get(
+  "/get-all-semesters",
+  verifyAccessToken,
+  semesterController.getAllSemesters
+);
+
 export default SemesterAPIRoutes;
