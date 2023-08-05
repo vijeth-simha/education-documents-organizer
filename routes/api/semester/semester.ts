@@ -20,7 +20,7 @@ const upload = multer({ storage: storage });
 SemesterAPIRoutes.post(
   "/create-semester",
   verifyAccessToken,
-  upload.single("semesterPic"),
+  // upload.single("semesterPic"),
   semesterController.createSemester
 );
 
