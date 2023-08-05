@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
 import Category from "./category";
+import Subject from "./subject";
 
 @Entity()
 export default class Semester {
@@ -27,4 +28,7 @@ export default class Semester {
 
   @ManyToOne(() => Category, (category) => category.semester)
   category: string;
+
+  @OneToMany(()=>Subject,(subject)=>subject.semester)
+  subject: Subject[]
 }
