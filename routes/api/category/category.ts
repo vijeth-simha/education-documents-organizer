@@ -26,17 +26,17 @@ CategoryAPIRoutes.post(
 );
 
 
-CategoryAPIRoutes.get(
-  "/get-all-categories",
-  verifyAccessToken,
-  categoryController.getAllCategories
-);
+// CategoryAPIRoutes.get(
+//   "/get-all-categories",
+//   verifyAccessToken,
+//   categoryController.getAllCategories
+// );
 
-CategoryAPIRoutes.delete(
-  "/delete-category/:id",
-  verifyAccessToken,
-  categoryController.deleteCategory
-);
+// CategoryAPIRoutes.delete(
+//   "/delete-category/:id",
+//   verifyAccessToken,
+//   categoryController.deleteCategory
+// );
 
 
 export default CategoryAPIRoutes;

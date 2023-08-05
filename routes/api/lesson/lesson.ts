@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { FileType } from "../../../interfaces";
 const { verifyAccessToken } = require("../../../helpers/JWTHelperUtils");
-const semesterController = require("../../../controllers/semesterController");
+const lessonController = require("../../../controllers/lessonController");
 
 const LessonAPIRoutes = Router();
 
@@ -21,7 +21,7 @@ LessonAPIRoutes.post(
   "/create-lesson",
   verifyAccessToken,
   upload.single("lessonPic"),
-  semesterController.createLesson
+  lessonController.createLesson
 );
 
 export default LessonAPIRoutes;
