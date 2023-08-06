@@ -31,20 +31,20 @@ const createLesson = async (req: Request, res: Response) => {
 //   }
   
   
-//   const deleteSemester = async (req: Request, res: Response) => {
-//     const subjectRepository = AppDataSource.getRepository(Semester);
-//     const { id } = req.params;
-//     try {
-//       await subjectRepository.delete(Number(id));
-//       res.status(STATUS_CODES.success).send("Semester Deleted Successfully");
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+  const deleteSemester = async (req: Request, res: Response) => {
+    const subjectRepository = AppDataSource.getRepository(Lesson);
+    const { id } = req.params;
+    try {
+      await subjectRepository.delete(Number(id));
+      res.status(STATUS_CODES.success).send("Semester Deleted Successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
 module.exports={
     createLesson,
     // getAllLesson,
-    // deleteSemester
+    deleteSemester
 }
