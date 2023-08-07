@@ -20,15 +20,15 @@ const createSubject = async (req: Request, res: Response) => {
     }
   };
   
-//   const getAllSemesters = async(req:Request,res:Response)=> {
-//     const subjectRepository = AppDataSource.getRepository(Semester);
-//     try {
-//       const semesters:Semester[] = await subjectRepository.find();
-//       res.status(STATUS_CODES.success).send(semesters);
-//     } catch (error) {    
-//       res.status(STATUS_CODES.error).send("Internal Server Error");
-//     }
-//   }
+  const getAllSubjects = async(req:Request,res:Response)=> {
+    const subjectRepository = AppDataSource.getRepository(Subject);
+    try {
+      const subjects:Subject[] = await subjectRepository.find();
+      res.status(STATUS_CODES.success).send(subjects);
+    } catch (error) {    
+      res.status(STATUS_CODES.error).send("Internal Server Error");
+    }
+  }
   
   
 //   const deleteSemester = async (req: Request, res: Response) => {
@@ -45,6 +45,6 @@ const createSubject = async (req: Request, res: Response) => {
 
 module.exports={
     createSubject,
-    // getAllSemesters,
+    getAllSubjects,
     // deleteSemester
 }

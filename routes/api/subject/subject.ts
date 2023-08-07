@@ -26,11 +26,11 @@ SubjectAPIRoutes.post(
 );
 
 
-// SubjectAPIRoutes.get(
-//   "/get-all-subjects",
-//   verifyAccessToken,
-//   subjectController.getAllSubjects
-// );
+SubjectAPIRoutes.get(
+  "/get-all-subjects",
+  verifyAccessToken,
+  subjectController.getAllSubjects
+);
 
 // SubjectAPIRoutes.delete(
 //   "/delete-subject/:id",

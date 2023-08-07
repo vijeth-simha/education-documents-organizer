@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+} from "typeorm";
 import Semester from "./semester";
 import Lesson from "./lesson";
 
@@ -13,18 +19,24 @@ export default class Subject {
   @Column()
   createdAt: Date;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   updatedAt: Date;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   subjectId: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   subjectPic: string;
 
-  @ManyToOne(()=>Semester,(semester)=>semester.subject)
+  @ManyToOne(() => Semester, (semester) => semester.subject)
   semester: string;
 
-  @OneToMany(()=>Lesson,(lesson)=>lesson.subject)
-  lesson: Lesson[]
+  @OneToMany(() => Lesson, (lesson) => lesson.subject)
+  lesson: Lesson[];
 }
