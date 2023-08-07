@@ -26,6 +26,11 @@ export default class Semester {
   })
   semesterPic: string;
 
+  @Column({
+    nullable:true
+  })
+  categoryId:number;
+  
   @ManyToOne(() => Category, (category) => category.semester)
   category: string;
 
