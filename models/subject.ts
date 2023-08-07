@@ -34,9 +34,15 @@ export default class Subject {
   })
   subjectPic: string;
 
+  @Column({
+    nullable:true
+  })
+  semesterId: string;
+
   @ManyToOne(() => Semester, (semester) => semester.subject)
   semester: string;
 
   @OneToMany(() => Lesson, (lesson) => lesson.subject)
   lesson: Lesson[];
+  
 }
