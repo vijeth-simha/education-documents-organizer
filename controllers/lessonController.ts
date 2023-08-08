@@ -33,11 +33,11 @@ const createLesson = async (req: Request, res: Response) => {
   }
   
   
-  const deleteSemester = async (req: Request, res: Response) => {
-    const subjectRepository = AppDataSource.getRepository(Lesson);
+  const deleteLesson = async (req: Request, res: Response) => {
+    const lessonRepository = AppDataSource.getRepository(Lesson);
     const { id } = req.params;
     try {
-      await subjectRepository.delete(Number(id));
+      await lessonRepository.delete(Number(id));
       res.status(STATUS_CODES.success).send("Semester Deleted Successfully");
     } catch (error) {
       console.log(error);
@@ -48,5 +48,5 @@ const createLesson = async (req: Request, res: Response) => {
 module.exports={
     createLesson,
     getAllLessons,
-    deleteSemester
+    deleteLesson
 }
