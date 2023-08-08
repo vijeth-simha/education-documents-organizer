@@ -21,7 +21,7 @@ const upload = multer({ storage:storage });
 CategoryAPIRoutes.post(
   "/create-category",
   verifyAccessToken,
-  // upload.single("categoryPic"),
+  upload.single("categoryPic"),
   categoryController.createCategory
 );
 
