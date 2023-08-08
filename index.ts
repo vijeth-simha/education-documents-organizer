@@ -6,6 +6,7 @@ import { AppDataSource } from "./db";
 import {
   AuthRoutes,
   CategoryAPIRoutes,
+  DocumentAPIRoutes,
   LessonAPIRoutes,
   SemesterAPIRoutes,
   SubjectAPIRoutes,
@@ -42,6 +43,7 @@ app.use("/api/v1/category", CategoryAPIRoutes);
 app.use("/api/v1/semester", SemesterAPIRoutes);
 app.use("/api/v1/subject", SubjectAPIRoutes);
 app.use("/api/v1/lesson", LessonAPIRoutes);
+app.use("/api/v1/document", DocumentAPIRoutes);
 
 app.use("/dashboard", DashboardRoutes);
 app.use("/category", CategoryPublicRoutes);
