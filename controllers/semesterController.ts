@@ -10,6 +10,7 @@ const createSemester = async (req: Request, res: Response) => {
   
     const semesterRepository = AppDataSource.getRepository(Semester);
     semesterObject.createdAt = new Date();
+    semesterObject.categoryId = semesterObject.category;
     // semesterObject.semesterPic = filename;
     try {
       await semesterRepository.save(semesterObject);

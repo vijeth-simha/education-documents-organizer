@@ -7,10 +7,11 @@ import { Lesson } from "../models";
 const createLesson = async (req: Request, res: Response) => {
     // const { filename } = (req as MulterRequest).file;
     const lessonObject: Lesson = req.body;
-  
+    console.log(lessonObject);
+    
     const lessonRepository = AppDataSource.getRepository(Lesson);
     lessonObject.createdAt = new Date();
-    // lessonObject.subjectPic = filename;
+    // lessonObject.lessonPic = filename;
     try {
       await lessonRepository.save(lessonObject);
       res.status(STATUS_CODES.success).send("Lesson for the subject created successfully");
@@ -20,15 +21,15 @@ const createLesson = async (req: Request, res: Response) => {
     }
   };
   
-//   const getAllLesson = async(req:Request,res:Response)=> {
-//     const lessonRepository = AppDataSource.getRepository(Lesson);
-//     try {
-//       const lesson:Lesson[] = await lessonRepository.find();
-//       res.status(STATUS_CODES.success).send(Lesson);
-//     } catch (error) {    
-//       res.status(STATUS_CODES.error).send("Internal Server Error");
-//     }
-//   }
+  const getAllLessons = async(req:Request,res:Response)=> {
+    const lessonRepository = AppDataSource.getRepository(Lesson);
+    try {
+      const lesson:Lesson[] = await lessonRepository.find();
+      res.status(STATUS_CODES.success).send(lesson);
+    } catch (error) {    
+      res.status(STATUS_CODES.error).send("Internal Server Error");
+    }
+  }
   
   
   const deleteSemester = async (req: Request, res: Response) => {
@@ -45,6 +46,6 @@ const createLesson = async (req: Request, res: Response) => {
 
 module.exports={
     createLesson,
-    // getAllLesson,
+    getAllLessons,
     deleteSemester
 }

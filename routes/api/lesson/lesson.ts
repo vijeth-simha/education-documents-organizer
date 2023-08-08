@@ -24,4 +24,10 @@ LessonAPIRoutes.post(
   lessonController.createLesson
 );
 
+LessonAPIRoutes.get(
+  "/get-all-lessons",
+  verifyAccessToken,
+  lessonController.getAllLessons
+);
+
 export default LessonAPIRoutes;

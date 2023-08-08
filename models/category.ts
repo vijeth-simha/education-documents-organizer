@@ -23,6 +23,8 @@ export default class Category {
   @Column()
   shortDescription: string;
 
-  @OneToMany(() => Semester, (semester) => semester.category)
+  @OneToMany(() => Semester, (semester) => semester.category, {
+    cascade: true,
+  })
   semester: Semester[];
 }

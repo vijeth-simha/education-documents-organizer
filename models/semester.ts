@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+  JoinColumn,
+} from "typeorm";
 import Category from "./category";
 import Subject from "./subject";
 
@@ -27,13 +34,14 @@ export default class Semester {
   semesterPic: string;
 
   @Column({
-    nullable:true
+    nullable: false,
   })
-  categoryId:number;
-  
-  @ManyToOne(() => Category, (category) => category.semester)
-  category: string;
+  categoryId: number;
 
-  @OneToMany(()=>Subject,(subject)=>subject.semester)
-  subject: Subject[]
+  @ManyToOne(() => Category, (category) => category.semester)
+  @JoinColumn()
+  category: number;
+
+  @OneToMany(() => Subject, (subject) => subject.semester)
+  subject: Subject[];
 }
