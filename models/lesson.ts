@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from "typeorm";
 import Subject from "./subject";
+import Document from "./document";
 
 @Entity()
 export default class Lesson {
@@ -35,6 +36,11 @@ export default class Lesson {
   @ManyToOne(() => Subject, (subject) => subject.lesson)
   @JoinColumn()
   subject: number;
+
+
+  @OneToMany(()=>Document,(document)=>document.lesson)
+  document:Document[];
+
 
 //   @OneToMany(()=>)
 }
