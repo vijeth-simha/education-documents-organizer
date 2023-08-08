@@ -11,6 +11,7 @@ const createLesson = async (req: Request, res: Response) => {
     
     const lessonRepository = AppDataSource.getRepository(Lesson);
     lessonObject.createdAt = new Date();
+    lessonObject.subjectId = lessonObject.subject;
     // lessonObject.lessonPic = filename;
     try {
       await lessonRepository.save(lessonObject);

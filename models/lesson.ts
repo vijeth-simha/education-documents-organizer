@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from "typeorm";
 import Subject from "./subject";
 
 @Entity()
@@ -28,11 +28,12 @@ export default class Lesson {
   lessonPic: string;
 
   @Column({
-    nullable: true,
+    nullable: false,
   })
   subjectId: number;
 
   @ManyToOne(() => Subject, (subject) => subject.lesson)
+  @JoinColumn()
   subject: number;
 
 //   @OneToMany(()=>)
