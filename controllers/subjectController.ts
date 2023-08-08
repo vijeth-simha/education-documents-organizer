@@ -5,13 +5,13 @@ import { MulterRequest } from "../interfaces";
 import { Subject } from "../models";
 
 const createSubject = async (req: Request, res: Response) => {
-    // const { filename } = (req as MulterRequest).file;
+    const { filename } = (req as MulterRequest).file;
     const subjectObject: Subject = req.body;
   
     const subjectRepository = AppDataSource.getRepository(Subject);
     subjectObject.createdAt = new Date();
     subjectObject.semesterId = subjectObject.semester;
-    // subjectObject.subjectPic = filename;
+    subjectObject.subjectPic = filename;
     try {
       await subjectRepository.save(subjectObject);
       res.status(STATUS_CODES.success).send("Subject for the semester created successfully");
