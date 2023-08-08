@@ -6,9 +6,7 @@ import { Lesson } from "../models";
 
 const createLesson = async (req: Request, res: Response) => {
     // const { filename } = (req as MulterRequest).file;
-    const lessonObject: Lesson = req.body;
-    console.log(lessonObject);
-    
+    const lessonObject: Lesson = req.body;    
     const lessonRepository = AppDataSource.getRepository(Lesson);
     lessonObject.createdAt = new Date();
     lessonObject.subjectId = lessonObject.subject;

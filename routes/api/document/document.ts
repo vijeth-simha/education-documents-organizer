@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { FileType } from "../../../interfaces";
 const { verifyAccessToken } = require("../../../helpers/JWTHelperUtils");
-const categoryController = require("../../../controllers/categoryController");
+const documentController = require("../../../controllers/documentController");
 
 const DocumentAPIRoutes = Router();
 
@@ -19,23 +19,16 @@ const upload = multer({ storage:storage });
 
 
 DocumentAPIRoutes.post(
-  "/create-category",
+  "/create-document",
   verifyAccessToken,
-  upload.single("categoryPic"),
-  categoryController.createCategory
-);
-
-
-DocumentAPIRoutes.get(
-  "/get-all-categories",
-  verifyAccessToken,
-  categoryController.getAllCategories
+  upload.single("documentURL"),
+  documentController.createDocument
 );
 
 // DocumentAPIRoutes.delete(
 //   "/delete-category/:id",
 //   verifyAccessToken,
-//   categoryController.deleteCategory
+//   documentController.deleteCategory
 // );
 
 
