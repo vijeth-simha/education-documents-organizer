@@ -1,8 +1,8 @@
 import { Request,Response } from "express";
 import { STATUS_CODES } from "../constants/constants";
 import { AppDataSource } from "../db";
-import { MulterRequest } from "../interfaces";
 import { Semester } from "../models";
+import { MulterRequest } from "../interfaces";
 
 const createSemester = async (req: Request, res: Response) => {
     const { filename } = (req as MulterRequest).file;
