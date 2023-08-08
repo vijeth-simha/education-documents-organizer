@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   OneToMany,
+  JoinColumn,
 } from "typeorm";
 import Semester from "./semester";
 import Lesson from "./lesson";
@@ -35,14 +36,14 @@ export default class Subject {
   subjectPic: string;
 
   @Column({
-    nullable:true
+    nullable: false,
   })
   semesterId: number;
 
   @ManyToOne(() => Semester, (semester) => semester.subject)
+  @JoinColumn()
   semester: number;
 
   @OneToMany(() => Lesson, (lesson) => lesson.subject)
   lesson: Lesson[];
-  
 }
