@@ -15,7 +15,6 @@ export default class Document {
   @Column()
   createdAt: Date;
 
-
   @Column({
     nullable: true,
   })
@@ -24,8 +23,9 @@ export default class Document {
   @Column()
   documentURL: string;
 
-  @Column({
-    nullable:true
+  @Column("text", {
+    nullable: true,
+    array: true,
   })
   otherLinks: string[];
 
@@ -33,8 +33,7 @@ export default class Document {
     nullable: false,
   })
   lessonId: number;
-  
-  @ManyToOne(()=>Lesson,(lesson)=>lesson.document)
-  lesson:number;
 
+  @ManyToOne(() => Lesson, (lesson) => lesson.document)
+  lesson: number;
 }
