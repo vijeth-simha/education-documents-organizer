@@ -3,17 +3,21 @@ import { STATUS_CODES } from "../constants/constants";
 import { AppDataSource } from "../db";
 import { MulterRequest } from "../interfaces";
 import { Document } from "../models";
+import { uploadToAWS } from "../helpers/S3Utils";
 
 const createDocument = async (req: Request, res: Response) => {
-  // const { filename } = (req as MulterRequest).file;
+  const { filename,buffer,originalname,mimetype } = (req as MulterRequest).file;
   const documentObject: Document = req.body;
   const documentRepository = AppDataSource.getRepository(Document);
   documentObject.createdAt = new Date();
   documentObject.lessonId = documentObject.lesson;
-  // documentObject.DocumentPic = filename;
+  documentObject.documentURL = originalname;
   try {
-    await documentRepository.save(documentObject);
-    res.status(STATUS_CODES.success).send("Document for the lesson created");
+    const uploadStatus:boolean = await uploadToAWS(originalname,buffer,mimetype);
+    if(uploadStatus) {
+      await documentRepository.save(documentObject);
+      res.status(STATUS_CODES.success).send("Document for the lesson created");
+    }
   } catch (error) {
     console.log(error);
     res.status(STATUS_CODES.error).send("Internal Server Error");

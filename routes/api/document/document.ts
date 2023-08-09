@@ -6,7 +6,7 @@ const documentController = require("../../../controllers/documentController");
 const DocumentAPIRoutes = Router();
 
 const multer  = require('multer')
-const storage = multer.diskStorage({
+const storage = multer.memoryStorage({
   destination:(req:Request, file:File, cb:any)=>{
     cb(null, './public/img/category-images')
   },
