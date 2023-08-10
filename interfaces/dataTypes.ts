@@ -50,4 +50,5 @@ export interface RequestQuery {
   lessonId:number;
   categoryId:number;
   semesterId:number;
+  subjectId:number;
 }
