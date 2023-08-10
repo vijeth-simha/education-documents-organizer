@@ -48,4 +48,6 @@ export interface MulterRequest extends Request {
 
 export interface RequestQuery {
   lessonId:number;
+  categoryId:number;
+  semesterId:number;
 }
