@@ -3,7 +3,7 @@ import { STATUS_CODES } from "../constants/constants";
 import { AppDataSource } from "../db";
 import { MulterRequest, RequestQuery } from "../interfaces";
 import { Document } from "../models";
-import { uploadToAWS } from "../helpers/S3Utils";
+import { getS3SignedURL, uploadToAWS } from "../helpers/S3Utils";
 import { getRandomString } from "../helpers/helperUtils";
 
 const createDocument = async (req: Request, res: Response) => {
@@ -41,6 +41,11 @@ const getAllDocuments = async (
     const documents: Document[] = await documentRepository.find({
       where: { lessonId: lessonId },
     });
+
+    for (let element of documents) {
+      element.documentURL = await getS3SignedURL(element.documentURL);
+    }
+    
     res.status(STATUS_CODES.success).send(documents);
   } catch (error) {
     res.status(STATUS_CODES.error).send("Internal Server Error");
