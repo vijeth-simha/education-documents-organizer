@@ -2,7 +2,11 @@ import {
   S3Client,
   PutObjectCommand,
   PutObjectRequest,
+  GetObjectCommand,
+  GetObjectCommandInput,
 } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
 const region: string = process.env.AWS_BUCKET_REGION ?? " ";
 const bucketName: string = process.env.AWS_BUCKET_NAME ?? " ";
 const access: string = process.env.AWS_ACCESS_KEY_ID ?? " ";
@@ -34,6 +38,16 @@ export const uploadToAWS = async (
     return true;
   } catch (error) {
     console.log(error);
-    return false
+    return false;
   }
+};
+
+export const getS3SignedURL = async (keyName:string) => {
+  const getObjectParams:GetObjectCommandInput ={
+    Bucket: bucketName,
+    Key: keyName
+  }
+  const command = new GetObjectCommand(getObjectParams);
+  const signedURL:string = await getSignedUrl(s3, command, { expiresIn: 3600 });
+  return signedURL;
 };

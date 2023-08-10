@@ -45,3 +45,7 @@ export interface FileType {
 export interface MulterRequest extends Request {
   file: FileType;
 }
+
+export interface RequestQuery {
+  lessonId:number;
+}
