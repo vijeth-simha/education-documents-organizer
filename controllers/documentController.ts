@@ -4,16 +4,18 @@ import { AppDataSource } from "../db";
 import { MulterRequest } from "../interfaces";
 import { Document } from "../models";
 import { uploadToAWS } from "../helpers/S3Utils";
+import { getRandomString } from "../helpers/helperUtils";
 
 const createDocument = async (req: Request, res: Response) => {
-  const { filename,buffer,originalname,mimetype } = (req as MulterRequest).file;
+  const { buffer,originalname,mimetype } = (req as MulterRequest).file;
   const documentObject: Document = req.body;
+  const randomOriginalFileName:string = getRandomString() + originalname;
   const documentRepository = AppDataSource.getRepository(Document);
   documentObject.createdAt = new Date();
   documentObject.lessonId = documentObject.lesson;
-  documentObject.documentURL = originalname;
+  documentObject.documentURL = randomOriginalFileName;
   try {
-    const uploadStatus:boolean = await uploadToAWS(originalname,buffer,mimetype);
+    const uploadStatus:boolean = await uploadToAWS(randomOriginalFileName,buffer,mimetype);
     if(uploadStatus) {
       await documentRepository.save(documentObject);
       res.status(STATUS_CODES.success).send("Document for the lesson created");
