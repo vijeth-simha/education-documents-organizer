@@ -11,7 +11,7 @@ import {
   SemesterAPIRoutes,
   SubjectAPIRoutes,
 } from "./routes/api";
-import { DashboardRoutes, CategoryPublicRoutes } from "./routes/public";
+import { DashboardRoutes, CategoryPublicRoutes, LessonPublicRoutes, SubjectPublicRoutes, SemesterPublicRoutes } from "./routes/public";
 
 const expressLayouts = require("express-ejs-layouts");
 const cors = require("cors");
@@ -47,8 +47,9 @@ app.use("/api/v1/document", DocumentAPIRoutes);
 
 app.use("/dashboard", DashboardRoutes);
 app.use("/category", CategoryPublicRoutes);
-app.use("/semester", SemesterAPIRoutes);
-app.use("/subject", SubjectAPIRoutes);
+app.use("/semester", SemesterPublicRoutes);
+app.use("/subject", SubjectPublicRoutes);
+app.use("/lesson", LessonPublicRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
