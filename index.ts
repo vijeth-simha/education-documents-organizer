@@ -47,6 +47,8 @@ app.use("/api/v1/document", DocumentAPIRoutes);
 
 app.use("/dashboard", DashboardRoutes);
 app.use("/category", CategoryPublicRoutes);
+app.use("/semester", SemesterAPIRoutes);
+app.use("/subject", SubjectAPIRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
