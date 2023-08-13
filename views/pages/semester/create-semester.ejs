@@ -17,7 +17,7 @@
               <h6 class="m-0 font-weight-bold text-primary">Create Semester</h6>
             </div>
             <div class="card-body">
-              <form class="user" id="categoryForm">
+              <form class="user" id="semesterForm">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -61,7 +61,7 @@
                 <button
                   type="button"
                   class="btn btn-primary btn-user btn-block"
-                  onclick="createCategory()"
+                  onclick="createSemester()"
                 >
                   Create Category
                 </button>
@@ -89,25 +89,25 @@
   <!-- End of Page Wrapper -->
 
   <script>
-    const createCategory = () => {
-      const formElement = document.querySelector("#categoryForm");
+    const createSemester = () => {
+      const formElement = document.querySelector("#semesterForm");
       const formData = new FormData(formElement);
-      postCategoryData(formData).then(async (response) => {
+      postSemesterData(formData).then(async (response) => {
         if (response.status === 200) {
           window.location.href = "/category";
         }
       });
     };
 
-    const postCategoryData = async (categoryData) => {
+    const postSemesterData = async (semesterData) => {
       const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
 
-      const response = await fetch("/api/v1/category/create-category", {
+      const response = await fetch("/api/v1/semester/create-semester", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-        body: categoryData,
+        body: semesterData,
       });
       return response;
     };
