@@ -15,13 +15,13 @@
           <div class="card shadow mb-4">
             <div class="card-header d-flex justify-content-between py-3">
               <h6 class="m-0 align-self-center font-weight-bold text-primary">
-                subjectsList
+                View Lessons
               </h6>
               <a
                 href="/subject/create-subject/"
                 class="btn btn-primary btn-icon-split"
               >
-                <span class="text">Create Subject</span>
+                <span class="text">Create Lesson</span>
               </a>
             </div>
             <div class="card-body">
@@ -34,21 +34,21 @@
                 >
                   <thead>
                     <tr>
-                      <th>Subject Pic</th>
+                      <th>Lesson Pic</th>
                       <th>Title</th>
                       <th>Created On</th>
                       <th>Short Description</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% if(subjectsList.length > 0) { %> <% subjectsList.forEach(subject =>
+                    <% if(lessonList.length > 0) { %> <% lessonList.forEach(lesson =>
                     { %>
                     <tr>
                       <td><img class="img-profile rounded-circle custom-img"
-                        src="../img/subject-images/<%- subject.subjectPic %>"></td>
-                      <td><%- subject.title %></td>
-                      <td><%- subject.createdAt.toLocaleDateString() %></td>
-                      <td><%- subject.shortDescription %></td>
+                        src="../img/lesson-images/<%- lesson.lessonPic %>"></td>
+                      <td><%- lesson.title %></td>
+                      <td><%- lesson.createdAt.toLocaleDateString() %></td>
+                      <td><%- lesson.shortDescription %></td>
                     </tr>
                     <%})%> <% } %>
                   </tbody>
