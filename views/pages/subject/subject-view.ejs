@@ -15,7 +15,7 @@
           <div class="card shadow mb-4">
             <div class="card-header d-flex justify-content-between py-3">
               <h6 class="m-0 align-self-center font-weight-bold text-primary">
-                Categories
+                subjectsList
               </h6>
               <a
                 href="/subject/create-subject/"
@@ -34,21 +34,21 @@
                 >
                   <thead>
                     <tr>
-                      <th>Semester Pic</th>
+                      <th>Subject Pic</th>
                       <th>Title</th>
                       <th>Created On</th>
                       <th>Short Description</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% if(categories.length > 0) { %> <% categories.forEach(category =>
+                    <% if(subjectsList.length > 0) { %> <% subjectsList.forEach(subject =>
                     { %>
                     <tr>
                       <td><img class="img-profile rounded-circle custom-img"
-                        src="../img/category-images/<%- category.categoryPic %>"></td>
-                      <td><%- category.title %></td>
-                      <td><%- category.createdAt.toLocaleDateString() %></td>
-                      <td><%- category.shortDescription %></td>
+                        src="../img/subject-images/<%- subject.subjectPic %>"></td>
+                      <td><%- subject.title %></td>
+                      <td><%- subject.createdAt.toLocaleDateString() %></td>
+                      <td><%- subject.shortDescription %></td>
                     </tr>
                     <%})%> <% } %>
                   </tbody>
