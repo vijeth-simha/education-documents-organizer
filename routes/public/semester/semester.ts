@@ -4,19 +4,19 @@ import { Semester } from "../../../models";
 const SemesterPublicRoutes = Router();
 
 SemesterPublicRoutes.get("/",async (req: Request, res: Response) => {
-  const categoryRepository = AppDataSource.getRepository(Semester);
-  const semestersList:Semester[] = await categoryRepository.find();
-  res.render("pages/category/semester-view",{semestersList});
+  const semesterRepository = AppDataSource.getRepository(Semester);
+  const semestersList:Semester[] = await semesterRepository.find();
+  res.render("pages/semester/semester-view",{semestersList});
 });
 
 
 SemesterPublicRoutes.get("/create-semester", (req: Request, res: Response) => {
-  res.render("pages/category/create-semester");
+  res.render("pages/semester/create-semester");
 });
 
 
 SemesterPublicRoutes.get("/edit-semester/:id", (req: Request, res: Response) => {
-  res.render("pages/category/edit-subject");
+  res.render("pages/semester/edit-subject");
 });
 
 
