@@ -1,0 +1,78 @@
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <%- include ("../../partials/sidebar") %>
+  
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <%- include ("../../partials/top-navbar") %>
+  
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header d-flex justify-content-between py-3">
+                <h6 class="m-0 align-self-center font-weight-bold text-primary">
+                  View Documents
+                </h6>
+                <a
+                  href="/subject/create-subject/"
+                  class="btn btn-primary btn-icon-split"
+                >
+                  <span class="text">Create Lesson</span>
+                </a>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    class="table"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                  >
+                    <thead>
+                      <tr>
+                        <th>Lesson Pic</th>
+                        <th>Title</th>
+                        <th>Created On</th>
+                        <th>Short Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% if(lessonList.length > 0) { %> <% lessonList.forEach(lesson =>
+                      { %>
+                      <tr>
+                        <td><img class="img-profile rounded-circle custom-img"
+                          src="../img/lesson-images/<%- lesson.lessonPic %>"></td>
+                        <td><%- lesson.title %></td>
+                        <td><%- lesson.createdAt.toLocaleDateString() %></td>
+                        <td><%- lesson.shortDescription %></td>
+                      </tr>
+                      <%})%> <% } %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+  
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Your Website 2020</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+  </body>
+  
