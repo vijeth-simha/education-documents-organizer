@@ -46,10 +46,10 @@ app.use("/api/v1/lesson", LessonAPIRoutes);
 app.use("/api/v1/document", DocumentAPIRoutes);
 
 app.use("/dashboard", DashboardRoutes);
-app.use("/category", CategoryPublicRoutes);
-app.use("/semester", SemesterPublicRoutes);
-app.use("/subject", SubjectPublicRoutes);
-app.use("/lesson", LessonPublicRoutes);
+app.use("/categories", CategoryPublicRoutes);
+app.use("/semesters", SemesterPublicRoutes);
+app.use("/subjects", SubjectPublicRoutes);
+app.use("/lessons", LessonPublicRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
