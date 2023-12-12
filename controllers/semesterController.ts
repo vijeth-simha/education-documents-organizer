@@ -5,7 +5,7 @@ import { Semester } from "../models";
 import { MulterRequest, RequestQuery } from "../interfaces";
 
 const createSemester = async (req: Request, res: Response) => {
-  const { filename } = (req as MulterRequest).file;
+  const { filename } = (req as MulterRequest)?.file;
   const semesterObject: Semester = req.body;
 
   const semesterRepository = AppDataSource.getRepository(Semester);
