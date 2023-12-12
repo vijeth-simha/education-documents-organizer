@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import { AppDataSource } from "../../../db";
-import { Semester } from "../../../models";
+import { Category, Semester } from "../../../models";
 const SemesterPublicRoutes = Router();
 
 SemesterPublicRoutes.get("/",async (req: Request, res: Response) => {
@@ -10,8 +10,12 @@ SemesterPublicRoutes.get("/",async (req: Request, res: Response) => {
 });
 
 
-SemesterPublicRoutes.get("/create-semester", (req: Request, res: Response) => {
-  res.render("pages/semester/create-semester");
+SemesterPublicRoutes.get("/create-semester", async (req: Request, res: Response) => {
+  const categoryRepository = AppDataSource.getRepository(Category);
+  const categories:Category[] = await categoryRepository.find();
+  console.log(categories);
+  
+  res.render("pages/semester/create-semester",{categoriesList:categories});
 });
 
 

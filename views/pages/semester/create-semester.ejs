@@ -38,7 +38,7 @@
                       <input
                         type="text"
                         name="shortDescription"
-                        class="form-control"
+                        class="form-control form-control-user"
                         id="categoryPic"
                         placeholder="Short Decription"
                       />
@@ -46,7 +46,15 @@
                   </div>
                 </div>
                 <div class="row mb-2">
-                  <div class="col-md-12">
+                  <div class="col-md-6">
+                    <select name="categories">
+                      <% categoriesList.forEach(category =>
+                      { %>
+                        <options><%- category.id %></options>
+                      <%})%>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
                     <label for="categoryPic" style="display: block"
                       >Semester pic</label
                     >
