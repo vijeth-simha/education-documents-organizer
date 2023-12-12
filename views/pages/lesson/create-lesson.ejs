@@ -94,7 +94,7 @@
       const formData = new FormData(formElement);
       postCategoryData(formData).then(async (response) => {
         if (response.status === 200) {
-          window.location.href = "/category";
+          window.location.href = "/lessons";
         }
       });
     };

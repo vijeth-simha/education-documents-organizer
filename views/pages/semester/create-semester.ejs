@@ -108,7 +108,7 @@
       const formData = new FormData(formElement);
       postSemesterData(formData).then(async (response) => {
         if (response.status === 200) {
-          window.location.href = "/semester";
+          window.location.href = "/semesters";
         }
       });
     };
