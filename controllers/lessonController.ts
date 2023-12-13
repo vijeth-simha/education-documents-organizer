@@ -5,12 +5,12 @@ import { MulterRequest, RequestQuery } from "../interfaces";
 import { Lesson } from "../models";
 
 const createLesson = async (req: Request, res: Response) => {
-  // const { filename } = (req as MulterRequest).file;
+  const { filename } = (req as MulterRequest).file;
   const lessonObject: Lesson = req.body;
   const lessonRepository = AppDataSource.getRepository(Lesson);
   lessonObject.createdAt = new Date();
   lessonObject.subjectId = lessonObject.subject;
-  // lessonObject.lessonPic = filename;
+  lessonObject.lessonPic = filename;
   try {
     await lessonRepository.save(lessonObject);
     res
@@ -41,7 +41,7 @@ const deleteLesson = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     await lessonRepository.delete(Number(id));
-    res.status(STATUS_CODES.success).send("Semester Deleted Successfully");
+    res.status(STATUS_CODES.success).send("lesson Deleted Successfully");
   } catch (error) {
     console.log(error);
   }
