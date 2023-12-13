@@ -50,7 +50,7 @@
                       <label for="semester">To which semester does it belong to? </label>
                         <select name="semester" class="form-control">
                         <option>choose below</option>
-                        <% semesterList.forEach(semester => { %>
+                        <% semestersList.forEach(semester => { %>
                         <option value="<%-semester.id %>">
                           <%- semester.title %>
                         </option>
