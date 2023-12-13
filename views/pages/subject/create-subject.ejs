@@ -38,14 +38,27 @@
                       <input
                         type="text"
                         name="shortDescription"
-                        class="form-control"
+                        class="form-control form-control-user"
                         placeholder="Short Decription"
                       />
                     </div>
                   </div>
                 </div>
                 <div class="row mb-2">
-                  <div class="col-md-12">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="semester">To which semester does it belong to? </label>
+                        <select name="semester" class="form-control">
+                        <option>choose below</option>
+                        <% semesterList.forEach(semester => { %>
+                        <option value="<%-semester.id %>">
+                          <%- semester.title %>
+                        </option>
+                        <%})%>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
                     <label for="subjectPic" style="display: block"
                       >Semester pic</label
                     >
