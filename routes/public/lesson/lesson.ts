@@ -13,7 +13,7 @@ LessonPublicRoutes.get("/",async (req: Request, res: Response) => {
 LessonPublicRoutes.get("/create-lesson", async (req: Request, res: Response) => {
   const subjectRepository = AppDataSource.getRepository(Subject);
   const subjectsList: Subject[] = await subjectRepository.find();
-  res.render("pages/category/create-lesson",{subjectsList});
+  res.render("pages/lesson/create-lesson",{subjectsList});
 });
 
 
