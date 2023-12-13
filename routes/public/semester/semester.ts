@@ -13,8 +13,6 @@ SemesterPublicRoutes.get("/",async (req: Request, res: Response) => {
 SemesterPublicRoutes.get("/create-semester", async (req: Request, res: Response) => {
   const categoryRepository = AppDataSource.getRepository(Category);
   const categories:Category[] = await categoryRepository.find();
-  console.log(categories);
-  
   res.render("pages/semester/create-semester",{categoriesList:categories});
 });
 
