@@ -8,7 +8,7 @@ const DocumentAPIRoutes = Router();
 const multer = require("multer");
 const storage = multer.memoryStorage({
   destination: (req: Request, file: File, cb: any) => {
-    cb(null, "./public/img/category-images");
+    cb(null, "./public/img/document-images");
   },
   filename: function (req: Request, file: FileType, cb: any) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);

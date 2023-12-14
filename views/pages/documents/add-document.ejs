@@ -48,26 +48,26 @@
                   <div class="row mb-2">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="category">Which lesson are you adding for? </label>
+                        <label for="lesson">Which lesson are you adding for? </label>
                           
-                          <select name="subject" class="form-control">
+                          <select name="lesson" class="form-control">
                           <option>choose below</option>
-                          <% lessonsList.forEach(subject => { %>
-                          <option value="<%-subject.id %>">
-                            <%- subject.title %>
+                          <% lessonsList.forEach(lesson => { %>
+                          <option value="<%-lesson.id %>">
+                            <%- lesson.title %>
                           </option>
                           <%})%>
                         </select>
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <label for="categoryPic" style="display: block"
-                        >Category pic</label
+                      <label for="documentURL" style="display: block"
+                        >Document</label
                       >
                       <input
                         type="file"
-                        name="categoryPic"
-                        id="categoryPic"
+                        name="documentURL"
+                        id="documentURL"
                         placeholder=""
                       />
                     </div>
