@@ -18,7 +18,7 @@ const storage = multer.memoryStorage({
 const upload = multer({ storage: storage });
 
 DocumentAPIRoutes.post(
-  "/create-document",
+  "/add-document",
   verifyAccessToken,
   upload.single("documentURL"),
   documentController.createDocument

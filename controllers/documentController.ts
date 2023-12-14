@@ -46,7 +46,7 @@ const getAllDocuments = async (
       element.documentURL = await getS3SignedURL(element.documentURL);
     }
     
-    res.status(STATUS_CODES.success).send(documents);
+    res.status(STATUS_CODES.success).send("Document added successfully");
   } catch (error) {
     res.status(STATUS_CODES.error).send("Internal Server Error");
   }
