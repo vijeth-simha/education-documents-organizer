@@ -1,23 +1,23 @@
 import { Request, Response, Router } from "express";
 import { AppDataSource } from "../../../db";
-import { Lesson, Subject } from "../../../models";
+import { Document, Lesson } from "../../../models";
 const DocumentPublicRoutes = Router();
 
 DocumentPublicRoutes.get("/",async (req: Request, res: Response) => {
+  const docuementRepository = AppDataSource.getRepository(Document);
+  const documentsList:Document[] = await docuementRepository.find();
+  res.render("pages/documents/documents-view",{documentsList});
+});
+
+
+DocumentPublicRoutes.get("/add-documents", async (req: Request, res: Response) => {
   const lessonRepository = AppDataSource.getRepository(Lesson);
-  const lessonsList:Lesson[] = await lessonRepository.find();
-  res.render("pages/lesson/lesson-view",{lessonsList});
+  const lessonList: Lesson[] = await lessonRepository.find();
+  res.render("pages/documents/add-document",{lessonList});
 });
 
 
-DocumentPublicRoutes.get("/create-lesson", async (req: Request, res: Response) => {
-  const subjectRepository = AppDataSource.getRepository(Subject);
-  const subjectsList: Subject[] = await subjectRepository.find();
-  res.render("pages/lesson/create-lesson",{subjectsList});
-});
-
-
-DocumentPublicRoutes.get("/edit-semester/:id", (req: Request, res: Response) => {
+DocumentPublicRoutes.get("/edit-document/:id", (req: Request, res: Response) => {
   res.render("pages/category/edit-subject");
 });
 

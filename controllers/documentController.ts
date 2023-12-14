@@ -57,7 +57,7 @@ const deleteDocument = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     await documentRepository.delete(Number(id));
-    res.status(STATUS_CODES.success).send("Semester Deleted Successfully");
+    res.status(STATUS_CODES.success).send("document Deleted Successfully");
   } catch (error) {
     console.log(error);
   }
