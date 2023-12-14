@@ -12,8 +12,8 @@ DocumentPublicRoutes.get("/",async (req: Request, res: Response) => {
 
 DocumentPublicRoutes.get("/add-documents", async (req: Request, res: Response) => {
   const lessonRepository = AppDataSource.getRepository(Lesson);
-  const lessonList: Lesson[] = await lessonRepository.find();
-  res.render("pages/documents/add-document",{lessonList});
+  const lessonsList: Lesson[] = await lessonRepository.find();
+  res.render("pages/documents/add-document",{lessonsList});
 });
 
 

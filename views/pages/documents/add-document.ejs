@@ -38,7 +38,7 @@
                         <input
                           type="text"
                           name="shortDescription"
-                          class="form-control"
+                          class="form-control form-control-user"
                           id="categoryPic"
                           placeholder="Short Decription"
                         />
@@ -46,7 +46,21 @@
                     </div>
                   </div>
                   <div class="row mb-2">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="category">Which lesson are you adding for? </label>
+                          
+                          <select name="subject" class="form-control">
+                          <option>choose below</option>
+                          <% lessonsList.forEach(subject => { %>
+                          <option value="<%-subject.id %>">
+                            <%- subject.title %>
+                          </option>
+                          <%})%>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
                       <label for="categoryPic" style="display: block"
                         >Category pic</label
                       >
