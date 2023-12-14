@@ -23,7 +23,7 @@ const createDocument = async (req: Request, res: Response) => {
       buffer,
       mimetype
     );
-    if (true) {
+    if (uploadStatus) {
       await documentRepository.save(documentObject);
       res.status(STATUS_CODES.success).send("Document for the lesson created");
     }
