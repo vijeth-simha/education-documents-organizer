@@ -9,14 +9,14 @@ import { getRandomString } from "../helpers/helperUtils";
 const createDocument = async (req: Request, res: Response) => {
   const { buffer, originalname, mimetype } = (req as MulterRequest).file;
   const documentObject: Document = req.body;
-  const newOtherLinks = JSON.parse(req.body.otherLinks);
+  const newOtherLinks: string[] = JSON.parse(req.body.otherLinks);
   const randomOriginalFileName: string = getRandomString() + originalname;
   const documentRepository = AppDataSource.getRepository(Document);
   documentObject.createdAt = new Date();
   documentObject.lessonId = documentObject.lesson;
   documentObject.documentURL = randomOriginalFileName;
   documentObject.otherLinks = newOtherLinks;
-  
+
   try {
     const uploadStatus: boolean = await uploadToAWS(
       randomOriginalFileName,
@@ -48,7 +48,7 @@ const getAllDocuments = async (
     for (let element of documents) {
       element.documentURL = await getS3SignedURL(element.documentURL);
     }
-    
+
     res.status(STATUS_CODES.success).send("Document added successfully");
   } catch (error) {
     res.status(STATUS_CODES.error).send("Internal Server Error");
