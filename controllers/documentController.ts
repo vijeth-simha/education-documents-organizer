@@ -9,18 +9,21 @@ import { getRandomString } from "../helpers/helperUtils";
 const createDocument = async (req: Request, res: Response) => {
   const { buffer, originalname, mimetype } = (req as MulterRequest).file;
   const documentObject: Document = req.body;
+  const newOtherLinks = JSON.parse(req.body.otherLinks);
   const randomOriginalFileName: string = getRandomString() + originalname;
   const documentRepository = AppDataSource.getRepository(Document);
   documentObject.createdAt = new Date();
   documentObject.lessonId = documentObject.lesson;
   documentObject.documentURL = randomOriginalFileName;
+  documentObject.otherLinks = newOtherLinks;
+  
   try {
     const uploadStatus: boolean = await uploadToAWS(
       randomOriginalFileName,
       buffer,
       mimetype
     );
-    if (uploadStatus) {
+    if (true) {
       await documentRepository.save(documentObject);
       res.status(STATUS_CODES.success).send("Document for the lesson created");
     }

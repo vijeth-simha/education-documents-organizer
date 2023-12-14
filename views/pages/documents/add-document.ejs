@@ -1,130 +1,155 @@
 <body id="page-top">
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-      <%- include ("../../partials/sidebar") %>
-  
-      <!-- Content Wrapper -->
-      <div id="content-wrapper" class="d-flex flex-column">
-        <!-- Main Content -->
-        <div id="content">
-          <%- include ("../../partials/top-navbar") %>
-  
-          <!-- Begin Page Content -->
-          <div class="container-fluid">
-            <!-- Page Heading -->
-            <div class="card shadow mb-4">
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Create Document</h6>
-              </div>
-              <div class="card-body">
-                <form class="user" id="documentForm">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="categoryTitle">Document Title</label>
-                        <input
-                          type="text"
-                          name="title"
-                          class="form-control form-control-user"
-                          id="categoryTitle"
-                          aria-describedby="categoryTitle"
-                          placeholder="Enter title"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="shortDescription">Short Description</label>
-                        <input
-                          type="text"
-                          name="shortDescription"
-                          class="form-control form-control-user"
-                          id="categoryPic"
-                          placeholder="Short Decription"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row mb-2">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="lesson">Which lesson are you adding for? </label>
-                          
-                          <select name="lesson" class="form-control">
-                          <option>choose below</option>
-                          <% lessonsList.forEach(lesson => { %>
-                          <option value="<%-lesson.id %>">
-                            <%- lesson.title %>
-                          </option>
-                          <%})%>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="documentURL" style="display: block"
-                        >Document</label
-                      >
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+    <%- include ("../../partials/sidebar") %>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <!-- Main Content -->
+      <div id="content">
+        <%- include ("../../partials/top-navbar") %>
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+          <!-- Page Heading -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Create Document</h6>
+            </div>
+            <div class="card-body">
+              <form class="user" id="documentForm">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="categoryTitle">Document Title</label>
                       <input
-                        type="file"
-                        name="documentURL"
-                        id="documentURL"
-                        placeholder=""
+                        type="text"
+                        name="title"
+                        class="form-control form-control-user"
+                        id="categoryTitle"
+                        aria-describedby="categoryTitle"
+                        placeholder="Enter title"
                       />
                     </div>
                   </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="shortDescription">Short Description</label>
+                      <input
+                        type="text"
+                        name="shortDescription"
+                        class="form-control form-control-user"
+                        id="categoryPic"
+                        placeholder="Short Decription"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="lesson"
+                        >Which lesson are you adding for?
+                      </label>
+
+                      <select name="lesson" class="form-control">
+                        <option>choose below</option>
+                        <% lessonsList.forEach(lesson => { %>
+                        <option value="<%-lesson.id %>">
+                          <%- lesson.title %>
+                        </option>
+                        <%})%>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="documentURL" style="display: block"
+                      >Document</label
+                    >
+                    <input
+                      type="file"
+                      name="documentURL"
+                      id="documentURL"
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+                <div class="row mb-2 inputs-secion-container">
+                  <div id="inputContainer">
+                    <input type="text" class="form-control dynamic-input" />
+                  </div>
                   <button
+                    id="addInputButton"
+                    onclick="addInputFields()"
                     type="button"
-                    class="btn btn-primary btn-user btn-block"
-                    onclick="addDocument()"
                   >
-                    Add document
+                    Add Input
                   </button>
-                  <hr />
-                </form>
-              </div>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-user btn-block"
+                  onclick="addDocument()"
+                >
+                  Add document
+                </button>
+                <hr />
+              </form>
             </div>
           </div>
-          <!-- /.container-fluid -->
         </div>
-        <!-- End of Main Content -->
-  
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright &copy; Your Website 2020</span>
-            </div>
-          </div>
-        </footer>
-        <!-- End of Footer -->
+        <!-- /.container-fluid -->
       </div>
-      <!-- End of Content Wrapper -->
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2020</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
     </div>
-    <!-- End of Page Wrapper -->
-  
-    <script>
-      const addDocument = () => {
-        const formElement = document.querySelector("#documentForm");
-        const formData = new FormData(formElement);
-        postDocumentData(formData).then(async (response) => {
-          if (response.status === 200) {
-            window.location.href = "/documents";
-          }
-        });
-      };
-  
-      const postDocumentData = async (documentsData) => {
-        const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
-  
-        const response = await fetch("/api/v1/document/add-document", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: documentsData,
-        });
-        return response;
-      };
-    </script>
-  </body>
-  
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <script>
+    const inputContainer = document.getElementById("inputContainer");
+    const addInputFields = () => {
+      const newInput = document.createElement("input");
+      newInput.type = "text";
+      newInput.className = "form-control dynamic-input";
+      inputContainer.appendChild(newInput);
+    };
+
+    const addDocument = () => {
+      const allDynamicInputs = document.querySelectorAll(".dynamic-input");
+      const dynamicInputValues = Array.from(allDynamicInputs).map((input) => input.value);
+      console.log(dynamicInputValues);
+      const formElement = document.querySelector("#documentForm");
+      const formData = new FormData(formElement);
+      formData.append("otherLinks",JSON.stringify(dynamicInputValues));
+      postDocumentData(formData).then(async (response) => {
+        if (response.status === 200) {
+          window.location.href = "/documents";
+        }
+      });
+    };
+
+    const postDocumentData = async (documentsData) => {
+      const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
+
+      const response = await fetch("/api/v1/document/add-document", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: documentsData,
+      });
+      return response;
+    };
+  </script>
+</body>
