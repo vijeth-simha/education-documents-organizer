@@ -18,7 +18,7 @@
                   View Documents
                 </h6>
                 <a
-                  href="/subject/create-documents/"
+                  href="/documents/add-documents/"
                   class="btn btn-primary btn-icon-split"
                 >
                   <span class="text">Create Documents</span>
@@ -34,21 +34,21 @@
                   >
                     <thead>
                       <tr>
-                        <th>Lesson Pic</th>
+                        <!-- <th>Lesson Pic</th> -->
                         <th>Title</th>
                         <th>Created On</th>
                         <th>Short Description</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <% if(lessonList.length > 0) { %> <% lessonList.forEach(lesson =>
+                      <% if(documentsList.length > 0) { %> <% documentsList.forEach(document =>
                       { %>
                       <tr>
-                        <td><img class="img-profile rounded-circle custom-img"
-                          src="../img/lesson-images/<%- lesson.lessonPic %>"></td>
-                        <td><%- lesson.title %></td>
-                        <td><%- lesson.createdAt.toLocaleDateString() %></td>
-                        <td><%- lesson.shortDescription %></td>
+                        <!-- <td><img class="img-profile rounded-circle custom-img"
+                          src="../img/document-images/<%- document.documentU %>"></td> -->
+                        <td><%- document.title %></td>
+                        <td><%- document.createdAt.toLocaleDateString() %></td>
+                        <td><%- document.shortDescription %></td>
                       </tr>
                       <%})%> <% } %>
                     </tbody>
