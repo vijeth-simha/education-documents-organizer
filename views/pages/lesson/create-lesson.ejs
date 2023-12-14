@@ -50,7 +50,7 @@
                     <div class="form-group">
                       <label for="category">Which subject are you adding for? </label>
                         
-                        <select name="category" class="form-control">
+                        <select name="subject" class="form-control">
                         <option>choose below</option>
                         <% subjectsList.forEach(subject => { %>
                         <option value="<%-subject.id %>">
@@ -116,7 +116,7 @@
     const postLessonData = async (lessonData) => {
       const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
 
-      const response = await fetch("/api/v1/category/create-lesson", {
+      const response = await fetch("/api/v1/lesson/create-lesson", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${accessToken}`,
