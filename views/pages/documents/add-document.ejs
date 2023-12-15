@@ -74,7 +74,8 @@
                     />
                   </div>
                 </div>
-                <div class="row mb-2 inputs-secion-container">
+                <label for="lesson">Add extra links </label>
+                <div class="row mb-2 ml-1 inputs-secion-container">
                   <div id="inputContainer">
                     <input type="text" class="form-control dynamic-input" />
                   </div>
@@ -127,11 +128,13 @@
 
     const addDocument = () => {
       const allDynamicInputs = document.querySelectorAll(".dynamic-input");
-      const dynamicInputValues = Array.from(allDynamicInputs).map((input) => input.value);
+      const dynamicInputValues = Array.from(allDynamicInputs).map(
+        (input) => input.value
+      );
       console.log(dynamicInputValues);
       const formElement = document.querySelector("#documentForm");
       const formData = new FormData(formElement);
-      formData.append("otherLinks",JSON.stringify(dynamicInputValues));
+      formData.append("otherLinks", JSON.stringify(dynamicInputValues));
       postDocumentData(formData).then(async (response) => {
         if (response.status === 200) {
           window.location.href = "/documents";
