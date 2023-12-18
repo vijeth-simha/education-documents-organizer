@@ -41,7 +41,7 @@ const deleteLesson = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     await lessonRepository.delete(Number(id));
-    res.status(STATUS_CODES.success).send("lesson Deleted Successfully");
+    res.status(STATUS_CODES.success).send("lesson deleted Successfully");
   } catch (error) {
     console.log(error);
   }
