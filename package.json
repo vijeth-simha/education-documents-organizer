@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "copy-assets": "ts-node tools/copyAssets",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc && npm run copy-assets",
     "start": "nodemon index.ts"
