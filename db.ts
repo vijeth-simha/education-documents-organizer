@@ -4,11 +4,11 @@ import Semester from "./models/semester";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: process.env.DATABASE_HOST,
+  host: "localhost",
   port: 5432,
-  username: process.env.DATABASE_USERNAME,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE_NAME,
+  username: "postgres",
+  password: "u7?7@zU?f/r-.GA",
+  database: "postgres",
   synchronize: true,
   logging: false,
   entities: [User, Category, Semester, Subject, Lesson, Document],
