@@ -22,7 +22,7 @@ jobs:
       - name: Deploy
         run: |
           sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.DROPLET_IP }} << EOF
-            cd /path/to/your/application
+            cd education-documents-organizer/
             git pull origin master
             npm install
             npm run build
