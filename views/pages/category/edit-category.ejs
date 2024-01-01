@@ -11,49 +11,62 @@
   
           <!-- Begin Page Content -->
           <div class="container-fluid">
-            <!-- DataTales Example -->
+            <!-- Page Heading -->
             <div class="card shadow mb-4">
-              <div class="card-header d-flex justify-content-between py-3">
-                <h6 class="m-0 align-self-center font-weight-bold text-primary">
-                  Categories
-                </h6>
-                <a
-                  href="/categories/create-category/"
-                  class="btn btn-primary btn-icon-split"
-                >
-                  <span class="text">Edit Category</span>
-                </a>
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Edit Category</h6>
               </div>
               <div class="card-body">
-                <div class="table-responsive">
-                  <table
-                    class="table"
-                    id="dataTable"
-                    width="100%"
-                    cellspacing="0"
+                <form class="user" id="categoryForm">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="categoryTitle">Category Title</label>
+                        <input
+                          type="text"
+                          name="title"
+                          class="form-control form-control-user"
+                          id="categoryTitle"
+                          aria-describedby="categoryTitle"
+                          placeholder="Enter title"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="shortDescription">Short Description</label>
+                        <input
+                          type="text"
+                          name="shortDescription"
+                          class="form-control"
+                          id="categoryPic"
+                          placeholder="Short Decription"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-2">
+                    <div class="col-md-12">
+                      <label for="categoryPic" style="display: block"
+                        >Category pic</label
+                      >
+                      <input
+                        type="file"
+                        name="categoryPic"
+                        id="categoryPic"
+                        placeholder=""
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-user btn-block"
+                    onclick="editCategory()"
                   >
-                    <thead>
-                      <tr>
-                        <th>Category Pic</th>
-                        <th>Title</th>
-                        <th>Created On</th>
-                        <th>Short Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% if(categories.length > 0) { %> <% categories.forEach(category =>
-                      { %>
-                      <tr>
-                        <td><img class="img-profile rounded-circle custom-img"
-                          src="../img/category-images/<%- category.categoryPic %>"></td>
-                        <td><%- category.title %></td>
-                        <td><%- category.createdAt.toLocaleDateString() %></td>
-                        <td><%- category.shortDescription %></td>
-                      </tr>
-                      <%})%> <% } %>
-                    </tbody>
-                  </table>
-                </div>
+                    Create Category
+                  </button>
+                  <hr />
+                </form>
               </div>
             </div>
           </div>
@@ -74,5 +87,30 @@
       <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
+  
+    <script>
+      const editCategory = () => {
+        const formElement = document.querySelector("#categoryForm");
+        const formData = new FormData(formElement);
+        postCategoryData(formData).then(async (response) => {
+          if (response.status === 200) {
+            window.location.href = "/categories";
+          }
+        });
+      };
+  
+      const postCategoryData = async (categoryData) => {
+        const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
+  
+        const response = await fetch("/api/v1/category/create-category", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: categoryData,
+        });
+        return response;
+      };
+    </script>
   </body>
   

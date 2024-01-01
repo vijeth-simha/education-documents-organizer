@@ -14,14 +14,14 @@
           <!-- Page Heading -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Edit Lesson</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Edit Semester</h6>
             </div>
             <div class="card-body">
-              <form class="user" id="lessonForm">
+              <form class="user" id="semesterForm">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="categoryTitle">Lesson Title</label>
+                      <label for="categoryTitle">Semester Title</label>
                       <input
                         type="text"
                         name="title"
@@ -39,7 +39,7 @@
                         type="text"
                         name="shortDescription"
                         class="form-control form-control-user"
-                        id="shortDescription"
+                        id="categoryPic"
                         placeholder="Short Decription"
                       />
                     </div>
@@ -48,26 +48,26 @@
                 <div class="row mb-2">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="category">Which subject are you adding for? </label>
+                      <label for="category">Category </label>
                         
-                        <select name="subject" class="form-control">
+                        <select name="category" class="form-control">
                         <option>choose below</option>
-                        <% subjectsList.forEach(subject => { %>
-                        <option value="<%-subject.id %>">
-                          <%- subject.title %>
+                        <% categoriesList.forEach(category => { %>
+                        <option value="<%-category.id %>">
+                          <%- category.title %>
                         </option>
                         <%})%>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <label for="lessonPic" style="display: block"
-                      >Category pic</label
+                    <label for="semesterPic" style="display: block"
+                      >Semester pic</label
                     >
                     <input
                       type="file"
-                      name="lessonPic"
-                      id="lessonPic"
+                      name="semesterPic"
+                      id="semesterPic"
                       placeholder=""
                     />
                   </div>
@@ -75,9 +75,9 @@
                 <button
                   type="button"
                   class="btn btn-primary btn-user btn-block"
-                  onclick="createLesson()"
+                  onclick="editSemester()"
                 >
-                  Create Lesson
+                  Create Semester
                 </button>
                 <hr />
               </form>
@@ -103,25 +103,25 @@
   <!-- End of Page Wrapper -->
 
   <script>
-    const createLesson = () => {
-      const formElement = document.querySelector("#lessonForm");
+    const editSemester = () => {
+      const formElement = document.querySelector("#semesterForm");
       const formData = new FormData(formElement);
-      postLessonData(formData).then(async (response) => {
+      postSemesterData(formData).then(async (response) => {
         if (response.status === 200) {
-          window.location.href = "/lessons";
+          window.location.href = "/semesters";
         }
       });
     };
 
-    const postLessonData = async (lessonData) => {
+    const postSemesterData = async (semesterData) => {
       const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
 
-      const response = await fetch("/api/v1/lesson/create-lesson", {
+      const response = await fetch("/api/v1/semester/create-semester", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-        body: lessonData,
+        body: semesterData,
       });
       return response;
     };
