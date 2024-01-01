@@ -14,7 +14,7 @@
           <!-- Page Heading -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Edit Lesson</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Create Lesson</h6>
             </div>
             <div class="card-body">
               <form class="user" id="lessonForm">
@@ -75,9 +75,9 @@
                 <button
                   type="button"
                   class="btn btn-primary btn-user btn-block"
-                  onclick="createLesson()"
+                  onclick="editLesson('<%- lesson.id %>')"
                 >
-                  Create Lesson
+                  Update Lesson
                 </button>
                 <hr />
               </form>
@@ -103,20 +103,20 @@
   <!-- End of Page Wrapper -->
 
   <script>
-    const createLesson = () => {
+    const editLesson = (lessonId) => {
       const formElement = document.querySelector("#lessonForm");
       const formData = new FormData(formElement);
-      postLessonData(formData).then(async (response) => {
+      postLessonData(formData,lessonId).then(async (response) => {
         if (response.status === 200) {
           window.location.href = "/lessons";
         }
       });
     };
 
-    const postLessonData = async (lessonData) => {
+    const postLessonData = async (lessonData,lessonId) => {
       const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
 
-      const response = await fetch("/api/v1/lesson/create-lesson", {
+      const response = await fetch(`/api/v1/lesson/edit-lesson/${lessonId}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${accessToken}`,
