@@ -36,6 +36,33 @@ const getAllLessons = async (req: Request<{}, {}, {}, RequestQuery>, res: Respon
   }
 };
 
+const editLesson = async (req: Request, res: Response) => {
+  const lessonRepository = AppDataSource.getRepository(Lesson);
+
+  console.log(req.body);
+  
+  const { id } = req.params;
+  const updatedLessonBody: Lesson = req.body;
+  if ((req as MulterRequest).file) {
+    const { filename } = (req as MulterRequest).file;
+    updatedLessonBody.lessonPic = filename;
+  }
+  try {
+    const lesson: Lesson | null = await lessonRepository.findOneBy({
+      id: Number(id),
+    });
+
+    await lessonRepository.save({
+      ...lesson,
+      ...updatedLessonBody,
+    });
+    res.status(STATUS_CODES.success).send("Lesson Updated Successfully");
+  } catch (error) {
+    console.log(error);
+    res.status(STATUS_CODES.error).send("Internal Server Error");
+  }
+};
+
 const deleteLesson = async (req: Request, res: Response) => {
   const lessonRepository = AppDataSource.getRepository(Lesson);
   const { id } = req.params;
@@ -50,5 +77,6 @@ const deleteLesson = async (req: Request, res: Response) => {
 module.exports = {
   createLesson,
   getAllLessons,
+  editLesson,
   deleteLesson,
 };

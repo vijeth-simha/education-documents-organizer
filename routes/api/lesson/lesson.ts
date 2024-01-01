@@ -30,4 +30,11 @@ LessonAPIRoutes.get(
   lessonController.getAllLessons
 );
 
+LessonAPIRoutes.put(
+  "/edit-lesson/:id",
+  verifyAccessToken,
+  upload.single('lessonPic'),
+  lessonController.editLesson
+);
+
 export default LessonAPIRoutes;
