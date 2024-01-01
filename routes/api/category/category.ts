@@ -35,8 +35,8 @@ CategoryAPIRoutes.get(
 CategoryAPIRoutes.put(
   "/edit-category/:id",
   verifyAccessToken,
-  upload.single('categoryImage'),
-  categoryController.editCourse
+  upload.single('categoryPic'),
+  categoryController.editCategory
 );
 
 // CategoryAPIRoutes.delete(

@@ -31,6 +31,32 @@ const getAllCategories = async(req:Request,res:Response)=> {
 }
 
 
+const editCategory = async (req: Request, res: Response) => {
+  const courseRepository = AppDataSource.getRepository(Category);
+
+  const { id } = req.params;
+  const updatedCategoryBody: Category = req.body;
+  if ((req as MulterRequest).file) {
+    const { filename } = (req as MulterRequest).file;
+    updatedCategoryBody.categoryPic = filename;
+  }
+  try {
+    const category: Category | null = await courseRepository.findOneBy({
+      id: Number(id),
+    });
+
+    await courseRepository.save({
+      ...category,
+      ...updatedCategoryBody,
+    });
+    res.status(STATUS_CODES.success).send("Category Updated Successfully");
+  } catch (error) {
+    console.log(error);
+    res.status(STATUS_CODES.error).send("Internal Server Error");
+  }
+};
+
+
 const deleteCategory = async (req: Request, res: Response) => {
   const categoryRepository = AppDataSource.getRepository(Category);
   const { id } = req.params;
@@ -45,5 +71,6 @@ const deleteCategory = async (req: Request, res: Response) => {
 module.exports = {
   createCategory,
   getAllCategories,
-  deleteCategory
+  deleteCategory,
+  editCategory
 };
