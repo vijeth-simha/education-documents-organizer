@@ -82,7 +82,7 @@
                 <button
                   type="button"
                   class="btn btn-primary btn-user btn-block"
-                  onclick="editCategory()"
+                  onclick="editCategory('<%- category.shortDescription %>')"
                 >
                   Create Category
                 </button>
@@ -110,21 +110,21 @@
   <!-- End of Page Wrapper -->
 
   <script>
-    const editCategory = () => {
+    const editCategory = (categoryId) => {
       const formElement = document.querySelector("#categoryForm");
       const formData = new FormData(formElement);
-      postCategoryData(formData).then(async (response) => {
+      postCategoryData(formData,categoryId).then(async (response) => {
         if (response.status === 200) {
-          window.location.href = "/categories";
+          window.location.href = "/categories/";
         }
       });
     };
 
-    const postCategoryData = async (categoryData) => {
+    const postCategoryData = async (categoryData,categoryId) => {
       const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
 
-      const response = await fetch("/api/v1/category/create-category", {
-        method: "POST",
+      const response = await fetch(`/api/v1/category/edit-category/${categoryId}`, {
+        method: "PUT",
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
