@@ -51,6 +51,17 @@ input[type="file"]::file-selector-button:active {
   cursor: pointer;
 }
 
+.file-close-icon {
+  margin-left: 2rem;
+  /* justify-content: center; */
+  display: flex !important;
+  margin-right: 0.5rem;
+  justify-content: center;
+  cursor: pointer;
+  align-items: center;
+  color: red;
+}
+
 .file-section-container {
   display: none;
   width: 100%;
