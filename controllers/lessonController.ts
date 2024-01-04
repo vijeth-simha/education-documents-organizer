@@ -39,23 +39,32 @@ const getAllLessons = async (req: Request<{}, {}, {}, RequestQuery>, res: Respon
 const editLesson = async (req: Request, res: Response) => {
   const lessonRepository = AppDataSource.getRepository(Lesson);
 
-  console.log(req.body);
   
   const { id } = req.params;
   const updatedLessonBody: Lesson = req.body;
+  const subjectId:number = Number(updatedLessonBody.subject);
+  updatedLessonBody.subjectId = subjectId;
   if ((req as MulterRequest).file) {
     const { filename } = (req as MulterRequest).file;
     updatedLessonBody.lessonPic = filename;
   }
+
+  // console.log("------------------",updatedLessonBody);
+
   try {
     const lesson: Lesson | null = await lessonRepository.findOneBy({
       id: Number(id),
     });
 
-    await lessonRepository.save({
+    const updatedLessonData=  {
       ...lesson,
       ...updatedLessonBody,
-    });
+    }
+
+    console.log(updatedLessonData);
+    
+    
+    await lessonRepository.save(updatedLessonData);
     res.status(STATUS_CODES.success).send("Lesson Updated Successfully");
   } catch (error) {
     console.log(error);

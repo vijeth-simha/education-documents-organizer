@@ -58,7 +58,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="shortDescription">Short Description</label>
-                      <textarea class="form-control">
+                      <textarea class="form-control" name="shortDescription">
                         <%- lesson.shortDescription %>
                       </textarea>
                     </div>
@@ -74,7 +74,7 @@
                       <img
                         class="category-image"
                         alt="Image placeholder"
-                        src="/img/category-images/<%- lesson.lessonPic %>"
+                        src="/img/lesson-images/<%- lesson.lessonPic %>"
                       />
                     </div>
                     <div class="file-section-container">
@@ -127,8 +127,6 @@
   <!-- End of Page Wrapper -->
 
   <script>
-    // console.log("<%- lesson.subjectId %>");
-    // document.getElementById("subjectValue").value = "<%- lesson.subject %>"
     const editLesson = (lessonId) => {
       const formElement = document.querySelector("#lessonForm");
       const formData = new FormData(formElement);
