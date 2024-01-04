@@ -30,4 +30,11 @@ SemesterAPIRoutes.get(
   semesterController.getAllSemesters
 );
 
+SemesterAPIRoutes.put(
+  "/edit-semester/:id",
+  verifyAccessToken,
+  upload.single("semesterPic"),
+  semesterController.editSemester
+);
+
 export default SemesterAPIRoutes;
