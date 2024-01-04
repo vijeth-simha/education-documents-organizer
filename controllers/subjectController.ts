@@ -39,6 +39,32 @@ const getAllSubjects = async (
   }
 };
 
+const editSubject = async (req: Request, res: Response) => {
+  const subjectRepository = AppDataSource.getRepository(Subject);
+  const { id } = req.params;
+  const updatedSubjectBody: Subject = req.body;
+  if ((req as MulterRequest).file) {
+    const { filename } = (req as MulterRequest).file;
+    updatedSubjectBody.subjectPic = filename;
+  }
+  try {
+    const subject: Subject | null = await subjectRepository.findOneBy({
+      id: Number(id),
+    });
+
+    const updatedSubjectData=  {
+      ...subject,
+      ...updatedSubjectBody,
+    }
+    await subjectRepository.save(updatedSubjectData);
+    res.status(STATUS_CODES.success).send("Lesson Updated Successfully");
+  } catch (error) {
+    console.log(error);
+    res.status(STATUS_CODES.error).send("Internal Server Error");
+  }
+};
+
+
   const deleteSubject = async (req: Request, res: Response) => {
     const subjectRepository = AppDataSource.getRepository(Subject);
     const { id } = req.params;
@@ -53,5 +79,6 @@ const getAllSubjects = async (
 module.exports = {
   createSubject,
   getAllSubjects,
-  deleteSubject
+  deleteSubject,
+  editSubject
 };

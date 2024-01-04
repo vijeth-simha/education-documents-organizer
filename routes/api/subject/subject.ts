@@ -32,6 +32,14 @@ SubjectAPIRoutes.get(
   subjectController.getAllSubjects
 );
 
+SubjectAPIRoutes.put(
+  "/edit-subject/:id",
+  verifyAccessToken,
+  upload.single("semesterPic"),
+  subjectController.editSubject
+);
+
+
 // SubjectAPIRoutes.delete(
 //   "/delete-subject/:id",
 //   verifyAccessToken,
