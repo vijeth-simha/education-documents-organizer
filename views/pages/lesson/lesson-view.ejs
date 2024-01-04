@@ -41,11 +41,17 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% if(lessonsList.length > 0) { %> <% lessonsList.forEach(lesson =>
-                    { %>
+                    <% if(lessonsList.length > 0) { %> <%
+                    lessonsList.forEach(lesson => { %>
                     <tr>
-                      <td><img class="img-profile rounded-circle custom-img"
-                        src="../img/lesson-images/<%- lesson.lessonPic %>"></td>
+                      <td>
+                        <a href="/lessons/edit-lesson/<%- lesson.id %>">
+                          <img
+                            class="img-profile rounded-circle custom-img"
+                            src="../img/lesson-images/<%- lesson.lessonPic %>"
+                          />
+                        </a>
+                      </td>
                       <td><%- lesson.title %></td>
                       <td><%- lesson.createdAt.toLocaleDateString() %></td>
                       <td><%- lesson.shortDescription %></td>

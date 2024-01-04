@@ -27,6 +27,7 @@
                         name="title"
                         class="form-control form-control-user"
                         id="categoryTitle"
+                        value="<%- lesson.title %>"
                         aria-describedby="categoryTitle"
                         placeholder="Enter title"
                       />
@@ -34,50 +35,73 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="shortDescription">Short Description</label>
-                      <input
-                        type="text"
-                        name="shortDescription"
-                        class="form-control form-control-user"
-                        id="shortDescription"
-                        placeholder="Short Decription"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="row mb-2">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="category">Which subject are you adding for? </label>
-                        
-                        <select name="subject" class="form-control">
+                      <label for="category"
+                        >Which subject are you adding for?
+                      </label>
+
+                      <select
+                        name="subjectId"
+                        id="subjectValue"
+                        class="form-control"
+                      >
                         <option>choose below</option>
                         <% subjectsList.forEach(subject => { %>
-                        <option value="<%-subject.id %>">
+                        <option value="<%-subject.id %>" <%= subject.id === lesson.subjectId ? 'selected' : '' %>>
                           <%- subject.title %>
                         </option>
                         <%})%>
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <label for="lessonPic" style="display: block"
-                      >Category pic</label
-                    >
-                    <input
-                      type="file"
-                      name="lessonPic"
-                      id="lessonPic"
-                      placeholder=""
-                    />
+                </div>
+                <div class="row mb-2">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="shortDescription">Short Description</label>
+                      <textarea class="form-control" name="shortDescription">
+                        <%- lesson.shortDescription %>
+                      </textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 mb-4">
+                    <div class="image-display-section">
+                      <i
+                        class="fas fa-window-close close-icon"
+                        onclick="showFileSection()"
+                      ></i>
+                      <img
+                        class="category-image"
+                        alt="Image placeholder"
+                        src="/img/lesson-images/<%- lesson.lessonPic %>"
+                      />
+                    </div>
+                    <div class="file-section-container">
+                      <div style="width: 100%">
+                        <label for="lessonPic" style="display: block"
+                          >Lesson pic</label
+                        >
+                        <input
+                          type="file" 
+                          name="lessonPic"
+                          id="lessonPic"
+                          placeholder=""
+                        />
+                        <i
+                          class="fas fa-window-close close-icon"
+                          onclick="showImageSection()"
+                        ></i>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <button
                   type="button"
                   class="btn btn-primary btn-user btn-block"
-                  onclick="createLesson()"
+                  onclick="editLesson('<%- lesson.id %>')"
                 >
-                  Create Lesson
+                  Update Lesson
                 </button>
                 <hr />
               </form>
@@ -103,21 +127,21 @@
   <!-- End of Page Wrapper -->
 
   <script>
-    const createLesson = () => {
+    const editLesson = (lessonId) => {
       const formElement = document.querySelector("#lessonForm");
       const formData = new FormData(formElement);
-      postLessonData(formData).then(async (response) => {
+      postLessonData(formData, lessonId).then(async (response) => {
         if (response.status === 200) {
           window.location.href = "/lessons";
         }
       });
     };
 
-    const postLessonData = async (lessonData) => {
+    const postLessonData = async (lessonData, lessonId) => {
       const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
 
-      const response = await fetch("/api/v1/lesson/create-lesson", {
-        method: "POST",
+      const response = await fetch(`/api/v1/lesson/edit-lesson/${lessonId}`, {
+        method: "PUT",
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

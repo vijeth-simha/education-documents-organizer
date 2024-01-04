@@ -9,7 +9,7 @@ const createLesson = async (req: Request, res: Response) => {
   const lessonObject: Lesson = req.body;
   const lessonRepository = AppDataSource.getRepository(Lesson);
   lessonObject.createdAt = new Date();
-  lessonObject.subjectId = lessonObject.subject;
+  // lessonObject.subjectId = lessonObject.subject;
   lessonObject.lessonPic = filename;
   try {
     await lessonRepository.save(lessonObject);
@@ -36,6 +36,31 @@ const getAllLessons = async (req: Request<{}, {}, {}, RequestQuery>, res: Respon
   }
 };
 
+const editLesson = async (req: Request, res: Response) => {
+  const lessonRepository = AppDataSource.getRepository(Lesson);
+  const { id } = req.params;
+  const updatedLessonBody: Lesson = req.body;
+  if ((req as MulterRequest).file) {
+    const { filename } = (req as MulterRequest).file;
+    updatedLessonBody.lessonPic = filename;
+  }
+  try {
+    const lesson: Lesson | null = await lessonRepository.findOneBy({
+      id: Number(id),
+    });
+
+    const updatedLessonData=  {
+      ...lesson,
+      ...updatedLessonBody,
+    }
+    await lessonRepository.save(updatedLessonData);
+    res.status(STATUS_CODES.success).send("Lesson Updated Successfully");
+  } catch (error) {
+    console.log(error);
+    res.status(STATUS_CODES.error).send("Internal Server Error");
+  }
+};
+
 const deleteLesson = async (req: Request, res: Response) => {
   const lessonRepository = AppDataSource.getRepository(Lesson);
   const { id } = req.params;
@@ -50,5 +75,6 @@ const deleteLesson = async (req: Request, res: Response) => {
 module.exports = {
   createLesson,
   getAllLessons,
+  editLesson,
   deleteLesson,
 };

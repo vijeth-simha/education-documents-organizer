@@ -14,7 +14,7 @@
           <!-- Page Heading -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Create Subject</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Edit Subject</h6>
             </div>
             <div class="card-body">
               <form class="user" id="subjectForm">
@@ -48,7 +48,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="semester">To which semester does it belong to? </label>
-                        <select name="semesterId" class="form-control">
+                        <select name="semester" class="form-control">
                         <option>choose below</option>
                         <% semestersList.forEach(semester => { %>
                         <option value="<%-semester.id %>">
@@ -73,7 +73,7 @@
                 <button
                   type="button"
                   class="btn btn-primary btn-user btn-block"
-                  onclick="createSubject()"
+                  onclick="editSubject()"
                 >
                   Create Subject
                 </button>
@@ -101,7 +101,7 @@
   <!-- End of Page Wrapper -->
 
   <script>
-    const createSubject = () => {
+    const editSubject = () => {
       const formElement = document.querySelector("#subjectForm");
       const formData = new FormData(formElement);
       postSubjectData(formData).then(async (response) => {

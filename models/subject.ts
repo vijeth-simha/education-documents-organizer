@@ -42,7 +42,7 @@ export default class Subject {
 
   @ManyToOne(() => Semester, (semester) => semester.subject)
   @JoinColumn()
-  semester: number;
+  semester: Semester;
 
   @OneToMany(() => Lesson, (lesson) => lesson.subject)
   lesson: Lesson[];

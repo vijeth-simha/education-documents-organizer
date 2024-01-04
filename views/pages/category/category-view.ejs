@@ -41,11 +41,17 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% if(categories.length > 0) { %> <% categories.forEach(category =>
-                    { %>
+                    <% if(categories.length > 0) { %> <%
+                    categories.forEach(category => { %>
                     <tr>
-                      <td><img class="img-profile rounded-circle custom-img"
-                        src="../img/category-images/<%- category.categoryPic %>"></td>
+                      <td>
+                        <a href="/categories/edit-category/<%- category.id %>">
+                          <img
+                            class="img-profile rounded-circle custom-img"
+                            src="../img/category-images/<%- category.categoryPic %>"
+                          />
+                        </a>
+                      </td>
                       <td><%- category.title %></td>
                       <td><%- category.createdAt.toLocaleDateString() %></td>
                       <td><%- category.shortDescription %></td>

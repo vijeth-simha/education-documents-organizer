@@ -42,3 +42,17 @@ input[type="file"]::file-selector-button:active {
   display: block;
   margin-top: 1rem;
 }
+
+.close-icon {
+  position: absolute;
+  right: 0;
+  top: -10px;
+  color: red;
+  cursor: pointer;
+}
+
+
+.file-section-container {
+  display: none;
+  width: 100%;
+}

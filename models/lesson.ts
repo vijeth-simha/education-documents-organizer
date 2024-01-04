@@ -35,7 +35,7 @@ export default class Lesson {
 
   @ManyToOne(() => Subject, (subject) => subject.lesson)
   @JoinColumn()
-  subject: number;
+  subject: Subject;
 
 
   @OneToMany(()=>Document,(document)=>document.lesson)

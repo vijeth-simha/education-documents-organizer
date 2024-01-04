@@ -10,7 +10,6 @@ const createSemester = async (req: Request, res: Response) => {
 
   const semesterRepository = AppDataSource.getRepository(Semester);
   semesterObject.createdAt = new Date();
-  semesterObject.categoryId = semesterObject.category;
   semesterObject.semesterPic = filename;
   try {
     await semesterRepository.save(semesterObject);
@@ -38,6 +37,31 @@ const getAllSemesters = async (
   }
 };
 
+const editSemester = async (req: Request, res: Response) => {
+  const semesterRepository = AppDataSource.getRepository(Semester);
+  const { id } = req.params;
+  const updatedSemesterBody: Semester = req.body;
+  if ((req as MulterRequest).file) {
+    const { filename } = (req as MulterRequest).file;
+    updatedSemesterBody.semesterPic = filename;
+  }
+  try {
+    const semester: Semester | null = await semesterRepository.findOneBy({
+      id: Number(id),
+    });
+
+    const updatedSemesterData=  {
+      ...semester,
+      ...updatedSemesterBody,
+    }
+    await semesterRepository.save(updatedSemesterData);
+    res.status(STATUS_CODES.success).send("Lesson Updated Successfully");
+  } catch (error) {
+    console.log(error);
+    res.status(STATUS_CODES.error).send("Internal Server Error");
+  }
+};
+
 const deleteSemester = async (req: Request, res: Response) => {
   const semesterRepository = AppDataSource.getRepository(Semester);
   const { id } = req.params;
@@ -53,4 +77,5 @@ module.exports = {
   createSemester,
   getAllSemesters,
   deleteSemester,
+  editSemester
 };

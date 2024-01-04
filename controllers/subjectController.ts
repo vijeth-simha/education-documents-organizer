@@ -10,7 +10,6 @@ const createSubject = async (req: Request, res: Response) => {
 
   const subjectRepository = AppDataSource.getRepository(Subject);
   subjectObject.createdAt = new Date();
-  subjectObject.semesterId = subjectObject.semester;
   subjectObject.subjectPic = filename;
   try {
     await subjectRepository.save(subjectObject);

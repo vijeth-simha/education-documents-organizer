@@ -13,7 +13,6 @@ const createDocument = async (req: Request, res: Response) => {
   const randomOriginalFileName: string = getRandomString() + originalname;
   const documentRepository = AppDataSource.getRepository(Document);
   documentObject.createdAt = new Date();
-  documentObject.lessonId = documentObject.lesson;
   documentObject.documentURL = randomOriginalFileName;
   documentObject.otherLinks = newOtherLinks;
 
