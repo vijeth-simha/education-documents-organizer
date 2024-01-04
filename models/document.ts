@@ -35,5 +35,5 @@ export default class Document {
   lessonId: number;
 
   @ManyToOne(() => Lesson, (lesson) => lesson.document)
-  lesson: number;
+  lesson: Lesson;
 }

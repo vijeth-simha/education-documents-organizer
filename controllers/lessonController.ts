@@ -38,17 +38,12 @@ const getAllLessons = async (req: Request<{}, {}, {}, RequestQuery>, res: Respon
 
 const editLesson = async (req: Request, res: Response) => {
   const lessonRepository = AppDataSource.getRepository(Lesson);
-
-  
   const { id } = req.params;
   const updatedLessonBody: Lesson = req.body;
   if ((req as MulterRequest).file) {
     const { filename } = (req as MulterRequest).file;
     updatedLessonBody.lessonPic = filename;
   }
-
-  // console.log("------------------",updatedLessonBody);
-
   try {
     const lesson: Lesson | null = await lessonRepository.findOneBy({
       id: Number(id),
