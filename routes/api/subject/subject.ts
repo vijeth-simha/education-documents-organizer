@@ -35,7 +35,7 @@ SubjectAPIRoutes.get(
 SubjectAPIRoutes.put(
   "/edit-subject/:id",
   verifyAccessToken,
-  upload.single("semesterPic"),
+  upload.single("subjectPic"),
   subjectController.editSubject
 );
 
