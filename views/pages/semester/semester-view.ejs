@@ -44,8 +44,13 @@
                     <% if(semestersList.length > 0) { %> <% semestersList.forEach(semester =>
                     { %>
                     <tr>
-                      <td><img class="img-profile rounded-circle custom-img"
-                        src="../img/semester-images/<%- semester.semesterPic %>"></td>
+                      <td>
+                        <a href="/lessons/edit-semester/<%- semester.id %>">
+                          <img class="img-profile rounded-circle custom-img"
+                          src="../img/semester-images/<%- semester.semesterPic %>">
+                        </a>
+                        
+                      </td>
                       <td><%- semester.title %></td>
                       <td><%- semester.createdAt.toLocaleDateString() %></td>
                       <td><%- semester.shortDescription %></td>

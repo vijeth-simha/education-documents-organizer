@@ -18,7 +18,7 @@ SemesterPublicRoutes.get("/create-semester", async (req: Request, res: Response)
 
 
 SemesterPublicRoutes.get("/edit-semester/:id", (req: Request, res: Response) => {
-  res.render("pages/semester/edit-subject");
+  res.render("pages/semester/edit-semester");
 });
 
 
