@@ -42,8 +42,6 @@ const editLesson = async (req: Request, res: Response) => {
   
   const { id } = req.params;
   const updatedLessonBody: Lesson = req.body;
-  const subjectId:number = Number(updatedLessonBody.subject);
-  updatedLessonBody.subjectId = subjectId;
   if ((req as MulterRequest).file) {
     const { filename } = (req as MulterRequest).file;
     updatedLessonBody.lessonPic = filename;
@@ -60,10 +58,6 @@ const editLesson = async (req: Request, res: Response) => {
       ...lesson,
       ...updatedLessonBody,
     }
-
-    console.log(updatedLessonData);
-    
-    
     await lessonRepository.save(updatedLessonData);
     res.status(STATUS_CODES.success).send("Lesson Updated Successfully");
   } catch (error) {
