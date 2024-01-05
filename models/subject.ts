@@ -17,6 +17,11 @@ export default class Subject {
   @Column()
   title: string;
 
+  @Column({
+    nullable: true,
+  })
+  shortDescription: string;
+
   @Column()
   createdAt: Date;
 

@@ -138,7 +138,7 @@
     const postSubjectData = async (categoryData,subjectId) => {
       const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
 
-      const response = await fetch(`/api/v1/subjects/edit-subject/${subjectId}`, {
+      const response = await fetch(`/api/v1/subject/edit-subject/${subjectId}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${accessToken}`,
