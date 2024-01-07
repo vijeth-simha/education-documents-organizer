@@ -38,6 +38,7 @@
                       <th>Title</th>
                       <th>Created On</th>
                       <th>Short Description</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -55,6 +56,16 @@
                       <td><%- category.title %></td>
                       <td><%- category.createdAt.toLocaleDateString() %></td>
                       <td><%- category.shortDescription %></td>
+                      <td>
+                        <a
+                          class="dropdown-item"
+                          href="#"
+                          data-toggle="modal"
+                          data-target="#deleteModal"
+                        >
+                          <i class="fas fa-trash"></i>
+                        </a>
+                      </td>
                     </tr>
                     <%})%> <% } %>
                   </tbody>
@@ -80,4 +91,31 @@
     <!-- End of Content Wrapper -->
   </div>
   <!-- End of Page Wrapper -->
+
+  <%- include ("../../partials/modal-view") %>
+
+  <script>
+    window.deleteCategory = (categoryId) => {
+      deleteCategoryData(categoryId).then(async (response) => {
+        if (response.status === 200) {
+          window.location.href = "/categories";
+        }
+      });
+    };
+
+    const deleteCategoryData = async (categoryId) => {
+      const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
+
+      const response = await fetch(
+        `/api/v1/category/delete-category/${categoryId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      return response;
+    };
+  </script>
 </body>
