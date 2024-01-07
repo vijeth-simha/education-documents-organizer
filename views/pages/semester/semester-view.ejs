@@ -91,7 +91,7 @@
     <!-- End of Content Wrapper -->
   </div>
   <!-- End of Page Wrapper -->
-  
+
   <%- include ("../../partials/modal-view") %>
 
   <script>
@@ -110,7 +110,7 @@
       const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
       
       const response = await fetch(
-        `/api/v1/semester/delete-senester/${semesterId}`,
+        `/api/v1/semester/delete-semester/${semesterId}`,
         {
           method: "DELETE",
           headers: {
