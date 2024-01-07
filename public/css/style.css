@@ -56,3 +56,12 @@ input[type="file"]::file-selector-button:active {
   display: none;
   width: 100%;
 }
+
+
+.danger {
+  color: red;
+}
+
+.btn-danger {
+  background-color: red;
+}

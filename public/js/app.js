@@ -18,3 +18,7 @@ const showImageSection = () => {
   document.querySelector(".image-display-section").style.display = "block";
   document.querySelector(".file-section-container").style.display = "none";
 };
+
+const setDataId = (type,id) => {
+  window[type] = id;
+}

@@ -58,6 +58,7 @@
                       <td><%- category.shortDescription %></td>
                       <td>
                         <a
+                          onclick="setDataId('categoryId','<%-category.id %>')"
                           class="dropdown-item"
                           href="#"
                           data-toggle="modal"
@@ -105,7 +106,7 @@
 
     const deleteCategoryData = async (categoryId) => {
       const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
-
+      console.log(window.categoryId);
       const response = await fetch(
         `/api/v1/category/delete-category/${categoryId}`,
         {
