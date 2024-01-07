@@ -37,4 +37,10 @@ LessonAPIRoutes.put(
   lessonController.editLesson
 );
 
+LessonAPIRoutes.delete(
+  "/delete-lesson/:id",
+  verifyAccessToken,
+  lessonController.deleteLesson
+);
+
 export default LessonAPIRoutes;

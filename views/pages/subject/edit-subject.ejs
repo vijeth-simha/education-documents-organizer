@@ -29,6 +29,7 @@
                         id="subjectTitle"
                         aria-describedby="subjectTitle"
                         placeholder="Enter title"
+                        value="<%- subject.title %>"
                       />
                     </div>
                   </div>
@@ -40,6 +41,7 @@
                         name="shortDescription"
                         class="form-control form-control-user"
                         placeholder="Short Decription"
+                        value="<%- subject.shortDescription %>"
                       />
                     </div>
                   </div>
@@ -48,34 +50,56 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="semester">To which semester does it belong to? </label>
-                        <select name="semester" class="form-control">
+                        <select name="semesterId" class="form-control">
                         <option>choose below</option>
                         <% semestersList.forEach(semester => { %>
-                        <option value="<%-semester.id %>">
+                        <option value="<%-semester.id %>" <%= semester.id ===subject.id ? 'selected': "" %> >
                           <%- semester.title %>
                         </option>
                         <%})%>
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <label for="subjectPic" style="display: block"
-                      >Semester pic</label
-                    >
-                    <input
-                      type="file"
-                      name="subjectPic"
-                      id="subjectPic"
-                      placeholder=""
-                    />
+                  
+                </div>
+                <div class="row mb-4">
+                  <div class="col-md-12">
+                    <div class="image-display-section">
+                      <i
+                        class="fas fa-window-close close-icon"
+                        onclick="showFileSection()"
+                      ></i>
+                      <img
+                        class="category-image"
+                        alt="Image placeholder"
+                        src="/img/subject-images/<%- subject.subjectPic %>"
+                      />
+                    </div>
+                    <div class="file-section-container">
+                      <div style="width: 100%">
+                        <label for="subjectPic" style="display: block"
+                        >Semester pic</label>
+                        <input
+                          type="file"
+                          name="subjectPic"
+                          id="subjectPic"
+                          placeholder=""
+                        />
+                        <i
+                          class="fas fa-window-close close-icon"
+                          onclick="showImageSection()"
+                        ></i>
+                      </div>
+                    </div>
+                    
                   </div>
                 </div>
                 <button
                   type="button"
                   class="btn btn-primary btn-user btn-block"
-                  onclick="editSubject()"
+                  onclick="editSubject('<%- subject.id %>')"
                 >
-                  Create Subject
+                  Update Subject
                 </button>
                 <hr />
               </form>
@@ -101,21 +125,21 @@
   <!-- End of Page Wrapper -->
 
   <script>
-    const editSubject = () => {
+    const editSubject = (subjectId) => {
       const formElement = document.querySelector("#subjectForm");
       const formData = new FormData(formElement);
-      postSubjectData(formData).then(async (response) => {
+      postSubjectData(formData,subjectId).then(async (response) => {
         if (response.status === 200) {
           window.location.href = "/subjects";
         }
       });
     };
 
-    const postSubjectData = async (categoryData) => {
+    const postSubjectData = async (categoryData,subjectId) => {
       const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
 
-      const response = await fetch("/api/v1/subject/create-subject", {
-        method: "POST",
+      const response = await fetch(`/api/v1/subject/edit-subject/${subjectId}`, {
+        method: "PUT",
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

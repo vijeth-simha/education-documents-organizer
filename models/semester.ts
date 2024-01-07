@@ -38,7 +38,9 @@ export default class Semester {
   })
   categoryId: number;
 
-  @ManyToOne(() => Category, (category) => category.semester)
+  @ManyToOne(() => Category, (category) => category.semester, {
+    onDelete: "CASCADE" // This will delete semester when the related category is deleted
+  })
   @JoinColumn()
   category: Category;
 

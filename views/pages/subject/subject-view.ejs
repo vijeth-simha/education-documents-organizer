@@ -38,17 +38,35 @@
                       <th>Title</th>
                       <th>Created On</th>
                       <th>Short Description</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     <% if(subjectsList.length > 0) { %> <% subjectsList.forEach(subject =>
                     { %>
                     <tr>
-                      <td><img class="img-profile rounded-circle custom-img"
-                        src="../img/subject-images/<%- subject.subjectPic %>"></td>
+
+                      <td>
+                        <a href="/subjects/edit-subject/<%- subject.id %>">
+                          <img class="img-profile rounded-circle custom-img"
+                          src="../img/subject-images/<%- subject.subjectPic %>">
+                        </a>
+                        
+                      </td>
                       <td><%- subject.title %></td>
                       <td><%- subject.createdAt.toLocaleDateString() %></td>
                       <td><%- subject.shortDescription %></td>
+                      <td>
+                        <a
+                          onclick="setDataId('subjectId','<%-subject.id %>')"
+                          class="dropdown-item"
+                          href="#"
+                          data-toggle="modal"
+                          data-target="#deleteModal"
+                        >
+                          <i class="fas fa-trash"></i>
+                        </a>
+                      </td>
                     </tr>
                     <%})%> <% } %>
                   </tbody>
@@ -74,4 +92,36 @@
     <!-- End of Content Wrapper -->
   </div>
   <!-- End of Page Wrapper -->
+
+  <%- include ("../../partials/modal-view") %>
+
+
+  <script>
+    window.deleteItem = () => {
+      const subjectId = window.subjectId;
+      deleteLessonData(subjectId).then(async (response) => {
+        if (response.status === 200) {
+          window.subjectId = null;
+          window.deleteItem = null;
+          window.location.href = "/lessons";
+        }
+      });
+    };
+
+    const deleteLessonData = async (subjectId) => {
+      const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
+      
+      const response = await fetch(
+        `/api/v1/subject/delete-subject/${subjectId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      return response;
+    };
+  </script>
+
 </body>

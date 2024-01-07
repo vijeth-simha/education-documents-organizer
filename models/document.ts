@@ -34,6 +34,8 @@ export default class Document {
   })
   lessonId: number;
 
-  @ManyToOne(() => Lesson, (lesson) => lesson.document)
+  @ManyToOne(() => Lesson, (lesson) => lesson.document, {
+    onDelete: "CASCADE" // This will delete semester when the related category is deleted
+  })
   lesson: Lesson;
 }

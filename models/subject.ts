@@ -17,6 +17,11 @@ export default class Subject {
   @Column()
   title: string;
 
+  @Column({
+    nullable: true,
+  })
+  shortDescription: string;
+
   @Column()
   createdAt: Date;
 
@@ -40,7 +45,9 @@ export default class Subject {
   })
   semesterId: number;
 
-  @ManyToOne(() => Semester, (semester) => semester.subject)
+  @ManyToOne(() => Semester, (semester) => semester.subject, {
+    onDelete: "CASCADE" // This will delete semester when the related category is deleted
+  })
   @JoinColumn()
   semester: Semester;
 

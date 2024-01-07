@@ -32,11 +32,19 @@ SubjectAPIRoutes.get(
   subjectController.getAllSubjects
 );
 
-// SubjectAPIRoutes.delete(
-//   "/delete-subject/:id",
-//   verifyAccessToken,
-//   subjectController.deleteSubject
-// );
+SubjectAPIRoutes.put(
+  "/edit-subject/:id",
+  verifyAccessToken,
+  upload.single("subjectPic"),
+  subjectController.editSubject
+);
+
+
+SubjectAPIRoutes.delete(
+  "/delete-subject/:id",
+  verifyAccessToken,
+  subjectController.deleteSubject
+);
 
 
 export default SubjectAPIRoutes;
