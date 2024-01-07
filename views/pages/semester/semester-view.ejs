@@ -38,6 +38,7 @@
                       <th>Title</th>
                       <th>Created On</th>
                       <th>Short Description</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -54,6 +55,17 @@
                       <td><%- semester.title %></td>
                       <td><%- semester.createdAt.toLocaleDateString() %></td>
                       <td><%- semester.shortDescription %></td>
+                      <td>
+                        <a
+                          onclick="setDataId('semesterId','<%-semester.id %>')"
+                          class="dropdown-item"
+                          href="#"
+                          data-toggle="modal"
+                          data-target="#deleteModal"
+                        >
+                          <i class="fas fa-trash"></i>
+                        </a>
+                      </td>
                     </tr>
                     <%})%> <% } %>
                   </tbody>
@@ -79,4 +91,33 @@
     <!-- End of Content Wrapper -->
   </div>
   <!-- End of Page Wrapper -->
+
+
+  <script>
+    window.deleteItem = () => {
+      const semesterId = window.semesterId;
+      deleteSemesterData(semesterId).then(async (response) => {
+        if (response.status === 200) {
+          window.semesterIId = null;
+          window.deleteItem = null;
+          window.location.href = "/semesters";
+        }
+      });
+    };
+
+    const deleteSemesterData = async (semesterId) => {
+      const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
+      
+      const response = await fetch(
+        `/api/v1/semester/delete-senester/${semesterId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      return response;
+    };
+  </script>
 </body>

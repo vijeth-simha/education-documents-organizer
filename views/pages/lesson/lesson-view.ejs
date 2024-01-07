@@ -55,6 +55,17 @@
                       <td><%- lesson.title %></td>
                       <td><%- lesson.createdAt.toLocaleDateString() %></td>
                       <td><%- lesson.shortDescription %></td>
+                      <td>
+                        <a
+                          onclick="setDataId('lessonId','<%-lesson.id %>')"
+                          class="dropdown-item"
+                          href="#"
+                          data-toggle="modal"
+                          data-target="#deleteModal"
+                        >
+                          <i class="fas fa-trash"></i>
+                        </a>
+                      </td>
                     </tr>
                     <%})%> <% } %>
                   </tbody>
@@ -80,4 +91,31 @@
     <!-- End of Content Wrapper -->
   </div>
   <!-- End of Page Wrapper -->
+  <script>
+    window.deleteItem = () => {
+      const categoryId = window.categoryId;
+      deleteSemesterData(categoryId).then(async (response) => {
+        if (response.status === 200) {
+          window.semesterIId = null;
+          window.deleteItem = null;
+          window.location.href = "/lessons";
+        }
+      });
+    };
+
+    const deleteSemesterData = async (categoryId) => {
+      const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
+      
+      const response = await fetch(
+        `/api/v1/lesson/delete-lesson/${categoryId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      return response;
+    };
+  </script>
 </body>
