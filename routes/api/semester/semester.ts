@@ -30,6 +30,12 @@ SemesterAPIRoutes.get(
   semesterController.getAllSemesters
 );
 
+SemesterAPIRoutes.delete(
+  "/delete-semester/:id",
+  verifyAccessToken,
+  semesterController.deleteSemester
+);
+
 SemesterAPIRoutes.put(
   "/edit-semester/:id",
   verifyAccessToken,
