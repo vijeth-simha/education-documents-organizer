@@ -52,10 +52,10 @@ const editSubject = async (req: Request, res: Response) => {
       id: Number(id),
     });
 
-    const updatedSubjectData=  {
+    const updatedSubjectData = {
       ...subject,
       ...updatedSubjectBody,
-    }
+    };
     await subjectRepository.save(updatedSubjectData);
     res.status(STATUS_CODES.success).send("Lesson Updated Successfully");
   } catch (error) {
@@ -64,21 +64,20 @@ const editSubject = async (req: Request, res: Response) => {
   }
 };
 
-
-  const deleteSubject = async (req: Request, res: Response) => {
-    const subjectRepository = AppDataSource.getRepository(Subject);
-    const { id } = req.params;
-    try {
-      await subjectRepository.delete(Number(id));
-      res.status(STATUS_CODES.success).send("Subject deleted Successfully");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const deleteSubject = async (req: Request, res: Response) => {
+  const subjectRepository = AppDataSource.getRepository(Subject);
+  const { id } = req.params;
+  try {
+    await subjectRepository.delete(Number(id));
+    res.status(STATUS_CODES.success).send("Subject deleted Successfully");
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports = {
   createSubject,
   getAllSubjects,
   deleteSubject,
-  editSubject
+  editSubject,
 };

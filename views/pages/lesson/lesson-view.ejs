@@ -91,23 +91,27 @@
     <!-- End of Content Wrapper -->
   </div>
   <!-- End of Page Wrapper -->
+
+  <%- include ("../../partials/modal-view") %>
+
+
   <script>
     window.deleteItem = () => {
-      const categoryId = window.categoryId;
-      deleteSemesterData(categoryId).then(async (response) => {
+      const lessonId = window.lessonId;
+      deleteLessonData(lessonId).then(async (response) => {
         if (response.status === 200) {
-          window.semesterIId = null;
+          window.lessonId = null;
           window.deleteItem = null;
           window.location.href = "/lessons";
         }
       });
     };
 
-    const deleteSemesterData = async (categoryId) => {
+    const deleteLessonData = async (lessonId) => {
       const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
       
       const response = await fetch(
-        `/api/v1/lesson/delete-lesson/${categoryId}`,
+        `/api/v1/lesson/delete-lesson/${lessonId}`,
         {
           method: "DELETE",
           headers: {

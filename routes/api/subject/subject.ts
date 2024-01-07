@@ -40,11 +40,11 @@ SubjectAPIRoutes.put(
 );
 
 
-// SubjectAPIRoutes.delete(
-//   "/delete-subject/:id",
-//   verifyAccessToken,
-//   subjectController.deleteSubject
-// );
+SubjectAPIRoutes.delete(
+  "/delete-subject/:id",
+  verifyAccessToken,
+  subjectController.deleteSubject
+);
 
 
 export default SubjectAPIRoutes;
