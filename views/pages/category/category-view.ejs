@@ -96,9 +96,12 @@
   <%- include ("../../partials/modal-view") %>
 
   <script>
-    window.deleteCategory = (categoryId) => {
+    window.deleteItem = () => {
+      const categoryId = window.categoryId;
       deleteCategoryData(categoryId).then(async (response) => {
         if (response.status === 200) {
+          window.categoryId = null;
+          window.deleteItem = null;
           window.location.href = "/categories";
         }
       });
@@ -106,7 +109,7 @@
 
     const deleteCategoryData = async (categoryId) => {
       const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
-      console.log(window.categoryId);
+      
       const response = await fetch(
         `/api/v1/category/delete-category/${categoryId}`,
         {

@@ -39,11 +39,11 @@ CategoryAPIRoutes.put(
   categoryController.editCategory
 );
 
-// CategoryAPIRoutes.delete(
-//   "/delete-category/:id",
-//   verifyAccessToken,
-//   categoryController.deleteCategory
-// );
+CategoryAPIRoutes.delete(
+  "/delete-category/:id",
+  verifyAccessToken,
+  categoryController.deleteCategory
+);
 
 
 export default CategoryAPIRoutes;
