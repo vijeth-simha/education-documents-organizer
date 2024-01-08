@@ -32,7 +32,7 @@ const getAllCategories = async(req:Request,res:Response)=> {
 
 
 const editCategory = async (req: Request, res: Response) => {
-  const courseRepository = AppDataSource.getRepository(Category);
+  const categoryRepository = AppDataSource.getRepository(Category);
 
   const { id } = req.params;
   const updatedCategoryBody: Category = req.body;
@@ -41,11 +41,11 @@ const editCategory = async (req: Request, res: Response) => {
     updatedCategoryBody.categoryPic = filename;
   }
   try {
-    const category: Category | null = await courseRepository.findOneBy({
+    const category: Category | null = await categoryRepository.findOneBy({
       id: Number(id),
     });
 
-    await courseRepository.save({
+    await categoryRepository.save({
       ...category,
       ...updatedCategoryBody,
     });
@@ -60,6 +60,9 @@ const editCategory = async (req: Request, res: Response) => {
 const deleteCategory = async (req: Request, res: Response) => {
   const categoryRepository = AppDataSource.getRepository(Category);
   const { id } = req.params;
+  const category: Category | null = await categoryRepository.findOneBy({
+    id: Number(id),
+  });
   try {
     await categoryRepository.delete(Number(id));
     res.status(STATUS_CODES.success).send("Category Deleted Successfully");
