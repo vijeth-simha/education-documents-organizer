@@ -3,6 +3,7 @@ import { STATUS_CODES } from "../constants/constants";
 import { AppDataSource } from "../db";
 import { MulterRequest, RequestQuery } from "../interfaces";
 import { Lesson } from "../models";
+import { deleteDocumentImage } from "../helpers/helperUtils";
 
 const createLesson = async (req: Request, res: Response) => {
   const { filename } = (req as MulterRequest).file;
@@ -64,6 +65,13 @@ const editLesson = async (req: Request, res: Response) => {
 const deleteLesson = async (req: Request, res: Response) => {
   const lessonRepository = AppDataSource.getRepository(Lesson);
   const { id } = req.params;
+
+  const lesson: Lesson | null = await lessonRepository.findOneBy({
+    id: Number(id),
+  });
+
+  const filePath: string = `./public/img/lesson-images/${lesson?.lessonPic}`;
+  await deleteDocumentImage(filePath);
   try {
     await lessonRepository.delete(Number(id));
     res.status(STATUS_CODES.success).send("lesson deleted Successfully");
