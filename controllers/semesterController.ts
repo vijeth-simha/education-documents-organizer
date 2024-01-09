@@ -3,6 +3,7 @@ import { STATUS_CODES } from "../constants/constants";
 import { AppDataSource } from "../db";
 import { Semester } from "../models";
 import { MulterRequest, RequestQuery } from "../interfaces";
+import { deleteDocumentImage } from "../helpers/helperUtils";
 
 const createSemester = async (req: Request, res: Response) => {
   const { filename } = (req as MulterRequest)?.file;
@@ -65,6 +66,12 @@ const editSemester = async (req: Request, res: Response) => {
 const deleteSemester = async (req: Request, res: Response) => {
   const semesterRepository = AppDataSource.getRepository(Semester);
   const { id } = req.params;
+  const semester: Semester | null = await semesterRepository.findOneBy({
+    id: Number(id),
+  });
+
+  const filePath: string = `./public/img/semester-images/${semester?.semesterPic}`;
+  await deleteDocumentImage(filePath);
   try {
     await semesterRepository.delete(Number(id));
     res.status(STATUS_CODES.success).send("Semester Deleted Successfully");
