@@ -3,7 +3,11 @@ import { STATUS_CODES } from "../constants/constants";
 import { AppDataSource } from "../db";
 import { MulterRequest, RequestQuery } from "../interfaces";
 import { Document } from "../models";
-import { deleteDocumentFromAWS, getS3SignedURL, uploadToAWS } from "../helpers/S3Utils";
+import {
+  deleteDocumentFromAWS,
+  getS3SignedURL,
+  uploadToAWS,
+} from "../helpers/S3Utils";
 import { getRandomString } from "../helpers/helperUtils";
 
 const createDocument = async (req: Request, res: Response) => {
@@ -61,20 +65,18 @@ const deleteDocument = async (req: Request, res: Response) => {
   const result = await documentRepository.findOneBy({ id: Number(id) });
   let lesson: Document;
 
-    if (result !== null) {
-      lesson = result;
-      // use lesson here
-    } else {
-      // handle the null case
+  if (result !== null) {
+    lesson = result;
+    // use lesson here
+    await deleteDocumentFromAWS(lesson.documentURL);
+    try {
+      await documentRepository.delete(Number(id));
+      res.status(STATUS_CODES.success).send("document deleted Successfully");
+    } catch (error) {
+      console.log(error);
     }
-
-
-  await deleteDocumentFromAWS(lesson.documentURL)
-  try {
-    await documentRepository.delete(Number(id));
-    res.status(STATUS_CODES.success).send("document deleted Successfully");
-  } catch (error) {
-    console.log(error);
+  } else {
+    // handle the null case
   }
 };
 
