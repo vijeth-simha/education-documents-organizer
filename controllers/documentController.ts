@@ -62,7 +62,7 @@ const deleteDocument = async (req: Request, res: Response) => {
   const documentRepository = AppDataSource.getRepository(Document);
   const { id } = req.params;
 
-  const result = await documentRepository.findOneBy({ id: Number(id) });
+  const result:Document | null  = await documentRepository.findOneBy({ id: Number(id) });
   let lesson: Document;
 
   if (result !== null) {
