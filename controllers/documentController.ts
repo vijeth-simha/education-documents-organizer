@@ -3,7 +3,7 @@ import { STATUS_CODES } from "../constants/constants";
 import { AppDataSource } from "../db";
 import { MulterRequest, RequestQuery } from "../interfaces";
 import { Document } from "../models";
-import { getS3SignedURL, uploadToAWS } from "../helpers/S3Utils";
+import { deleteDocumentFromAWS, getS3SignedURL, uploadToAWS } from "../helpers/S3Utils";
 import { getRandomString } from "../helpers/helperUtils";
 
 const createDocument = async (req: Request, res: Response) => {
@@ -57,6 +57,19 @@ const getAllDocuments = async (
 const deleteDocument = async (req: Request, res: Response) => {
   const documentRepository = AppDataSource.getRepository(Document);
   const { id } = req.params;
+
+  const result = await documentRepository.findOneBy({ id: Number(id) });
+  let lesson: Document;
+
+    if (result !== null) {
+      lesson = result;
+      // use lesson here
+    } else {
+      // handle the null case
+    }
+
+
+  await deleteDocumentFromAWS(lesson.documentURL)
   try {
     await documentRepository.delete(Number(id));
     res.status(STATUS_CODES.success).send("document deleted Successfully");
