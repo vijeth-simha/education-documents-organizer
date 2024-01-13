@@ -33,7 +33,7 @@ DocumentAPIRoutes.get(
 DocumentAPIRoutes.delete(
   "/delete-document/:id",
   verifyAccessToken,
-  documentController.deleteCategory
+  documentController.deleteDocument
 );
 
 export default DocumentAPIRoutes;
