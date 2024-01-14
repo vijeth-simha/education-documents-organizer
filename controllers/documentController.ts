@@ -77,6 +77,7 @@ const deleteDocument = async (req: Request, res: Response) => {
     }
   } else {
     // handle the null case
+    console.log("Null result");
   }
 };
 
