@@ -3,6 +3,7 @@ import { Category } from "../models";
 import { AppDataSource } from "../db";
 import { STATUS_CODES } from "../constants/constants";
 import { MulterRequest } from "../interfaces";
+import { deleteDocumentImage } from "../helpers/helperUtils";
 
 const createCategory = async (req: Request, res: Response) => {
   const { filename } = (req as MulterRequest).file;
@@ -20,19 +21,18 @@ const createCategory = async (req: Request, res: Response) => {
   }
 };
 
-const getAllCategories = async(req:Request,res:Response)=> {
+const getAllCategories = async (req: Request, res: Response) => {
   const categoryRepository = AppDataSource.getRepository(Category);
   try {
-    const categories:Category[] = await categoryRepository.find();
+    const categories: Category[] = await categoryRepository.find();
     res.status(STATUS_CODES.success).send(categories);
-  } catch (error) {    
+  } catch (error) {
     res.status(STATUS_CODES.error).send("Internal Server Error");
   }
-}
-
+};
 
 const editCategory = async (req: Request, res: Response) => {
-  const courseRepository = AppDataSource.getRepository(Category);
+  const categoryRepository = AppDataSource.getRepository(Category);
 
   const { id } = req.params;
   const updatedCategoryBody: Category = req.body;
@@ -41,11 +41,11 @@ const editCategory = async (req: Request, res: Response) => {
     updatedCategoryBody.categoryPic = filename;
   }
   try {
-    const category: Category | null = await courseRepository.findOneBy({
+    const category: Category | null = await categoryRepository.findOneBy({
       id: Number(id),
     });
 
-    await courseRepository.save({
+    await categoryRepository.save({
       ...category,
       ...updatedCategoryBody,
     });
@@ -56,10 +56,15 @@ const editCategory = async (req: Request, res: Response) => {
   }
 };
 
-
 const deleteCategory = async (req: Request, res: Response) => {
   const categoryRepository = AppDataSource.getRepository(Category);
   const { id } = req.params;
+  const category: Category | null = await categoryRepository.findOneBy({
+    id: Number(id),
+  });
+  const filePath: string = `./public/img/category-images/${category?.categoryPic}`;
+  await deleteDocumentImage(filePath);
+
   try {
     await categoryRepository.delete(Number(id));
     res.status(STATUS_CODES.success).send("Category Deleted Successfully");
@@ -72,5 +77,5 @@ module.exports = {
   createCategory,
   getAllCategories,
   deleteCategory,
-  editCategory
+  editCategory,
 };

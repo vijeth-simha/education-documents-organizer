@@ -1,78 +1,115 @@
 <body id="page-top">
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-      <%- include ("../../partials/sidebar") %>
-  
-      <!-- Content Wrapper -->
-      <div id="content-wrapper" class="d-flex flex-column">
-        <!-- Main Content -->
-        <div id="content">
-          <%- include ("../../partials/top-navbar") %>
-  
-          <!-- Begin Page Content -->
-          <div class="container-fluid">
-            <!-- DataTales Example -->
-            <div class="card shadow mb-4">
-              <div class="card-header d-flex justify-content-between py-3">
-                <h6 class="m-0 align-self-center font-weight-bold text-primary">
-                  View Documents
-                </h6>
-                <a
-                  href="/documents/add-documents/"
-                  class="btn btn-primary btn-icon-split"
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+    <%- include ("../../partials/sidebar") %>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <!-- Main Content -->
+      <div id="content">
+        <%- include ("../../partials/top-navbar") %>
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header d-flex justify-content-between py-3">
+              <h6 class="m-0 align-self-center font-weight-bold text-primary">
+                View Documents
+              </h6>
+              <a
+                href="/documents/add-documents/"
+                class="btn btn-primary btn-icon-split"
+              >
+                <span class="text">Add Documents</span>
+              </a>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table
+                  class="table"
+                  id="dataTable"
+                  width="100%"
+                  cellspacing="0"
                 >
-                  <span class="text">Add Documents</span>
-                </a>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table
-                    class="table"
-                    id="dataTable"
-                    width="100%"
-                    cellspacing="0"
-                  >
-                    <thead>
-                      <tr>
-                        <!-- <th>Lesson Pic</th> -->
-                        <th>Title</th>
-                        <th>Created On</th>
-                        <th>Short Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% if(documentsList.length > 0) { %> <% documentsList.forEach(document =>
-                      { %>
-                      <tr>
-                        <!-- <td><img class="img-profile rounded-circle custom-img"
+                  <thead>
+                    <tr>
+                      <!-- <th>Lesson Pic</th> -->
+                      <th>Title</th>
+                      <th>Created On</th>
+                      <th>Short Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% if(documentsList.length > 0) { %> <%
+                    documentsList.forEach(document => { %>
+                    <tr>
+                      <!-- <td><img class="img-profile rounded-circle custom-img"
                           src="../img/document-images/<%- document.documentU %>"></td> -->
-                        <td><%- document.title %></td>
-                        <td><%- document.createdAt.toLocaleDateString() %></td>
-                        <td><%- document.shortDescription %></td>
-                      </tr>
-                      <%})%> <% } %>
-                    </tbody>
-                  </table>
-                </div>
+                      <td><%- document.title %></td>
+                      <td><%- document.createdAt.toLocaleDateString() %></td>
+                      <td><%- document.shortDescription %></td>
+                      <td>
+                        <a
+                          onclick="setDataId('documentId','<%-document.id %>')"
+                          class="dropdown-item"
+                          href="#"
+                          data-toggle="modal"
+                          data-target="#deleteModal"
+                        >
+                          <i class="fas fa-trash"></i>
+                        </a>
+                      </td>
+                    </tr>
+                    <%})%> <% } %>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
-          <!-- /.container-fluid -->
         </div>
-        <!-- End of Main Content -->
-  
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright &copy; Your Website 2020</span>
-            </div>
-          </div>
-        </footer>
-        <!-- End of Footer -->
+        <!-- /.container-fluid -->
       </div>
-      <!-- End of Content Wrapper -->
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2020</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
     </div>
-    <!-- End of Page Wrapper -->
-  </body>
-  
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <%- include ("../../partials/modal-view") %>
+
+  <script>
+    window.deleteItem = () => {
+      const lessonId = window.documentId;
+      deleteLessonData(documentId).then(async (response) => {
+        if (response.status === 200) {
+          window.documentId = null;
+          window.deleteItem = null;
+          window.location.href = "/documents";
+        }
+      });
+    };
+
+    const deleteLessonData = async (documentId) => {
+      const { accessToken } = JSON.parse(localStorage.getItem("tokens"));
+
+      const response = await fetch(`/api/v1/document/delete-document/${documentId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      return response;
+    };
+  </script>
+</body>

@@ -30,10 +30,10 @@ DocumentAPIRoutes.get(
   documentController.getAllDocuments
 );
 
-// DocumentAPIRoutes.delete(
-//   "/delete-category/:id",
-//   verifyAccessToken,
-//   documentController.deleteCategory
-// );
+DocumentAPIRoutes.delete(
+  "/delete-document/:id",
+  verifyAccessToken,
+  documentController.deleteDocument
+);
 
 export default DocumentAPIRoutes;
