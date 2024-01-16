@@ -8,3 +8,8 @@ To organize documents for students for their respective education
     <br />
     <a href="https://github.com/vijeth-simha/education-documents-organizer/issues">Report Bug</a>
   </p>
+
+
+# About The Project
+
+This project provides a comprehensive framework for storing your education documents efficiently.
