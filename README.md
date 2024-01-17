@@ -1,6 +1,6 @@
 # education-documents-organizer
 
-To organize documents for students for their respective education
+To organize documents for students for their respective education which maybe MBA,B.E etc
 
 <p align="center">
     The purpose of the project is as a starting point or template for building storing your education documents using Node.js and Express. !
