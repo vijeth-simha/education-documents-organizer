@@ -71,7 +71,7 @@ const deleteSubject = async (req: Request, res: Response) => {
   const subject: Subject | null = await subjectRepository.findOneBy({
     id: Number(id),
   });
-  const filePath: string = `./public/img/subject-images/${subject?.subjectPic}`;
+  const filePath: string = `./dynamic/subject-images/${subject?.subjectPic}`;
   await deleteDocumentImage(filePath);
   try {
     await subjectRepository.delete(Number(id));

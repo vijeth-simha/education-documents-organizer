@@ -70,7 +70,7 @@ const deleteSemester = async (req: Request, res: Response) => {
     id: Number(id),
   });
 
-  const filePath: string = `./public/img/semester-images/${semester?.semesterPic}`;
+  const filePath: string = `./dynamic/semester-images/${semester?.semesterPic}`;
   await deleteDocumentImage(filePath);
   try {
     await semesterRepository.delete(Number(id));

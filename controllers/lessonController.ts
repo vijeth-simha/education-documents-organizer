@@ -70,7 +70,7 @@ const deleteLesson = async (req: Request, res: Response) => {
     id: Number(id),
   });
 
-  const filePath: string = `./public/img/lesson-images/${lesson?.lessonPic}`;
+  const filePath: string = `./dynamic/lesson-images/${lesson?.lessonPic}`;
   await deleteDocumentImage(filePath);
   try {
     await lessonRepository.delete(Number(id));
