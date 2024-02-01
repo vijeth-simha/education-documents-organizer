@@ -38,7 +38,10 @@ app.use(expressLayouts);
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
+app.use('/static',express.static(path.join(__dirname, "public")));
+app.use('/mnt',express.static(path.join(__dirname, "dynamic")));
+// app.use(express.static(path.join(__dirname, "/dynamic")));
 
 app.get("/", (req: Request, res: Response) => {
   // res.send("hello + TypeScript Server");
