@@ -62,7 +62,7 @@ const deleteCategory = async (req: Request, res: Response) => {
   const category: Category | null = await categoryRepository.findOneBy({
     id: Number(id),
   });
-  const filePath: string = `./dynamic-images/category-images/${category?.categoryPic}`;
+  const filePath: string = `./dynamic/category-images/${category?.categoryPic}`;
   await deleteDocumentImage(filePath);
 
   try {
