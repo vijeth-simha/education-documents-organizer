@@ -3,6 +3,7 @@ import "reflect-metadata";
 import { hostname, port } from "./constants/constants";
 require("dotenv").config();
 import { AppDataSource } from "./db";
+
 import {
   AuthRoutes,
   CategoryAPIRoutes,
@@ -11,6 +12,7 @@ import {
   SemesterAPIRoutes,
   SubjectAPIRoutes,
 } from "./routes/api";
+
 import {
   DashboardRoutes,
   CategoryPublicRoutes,
@@ -18,6 +20,7 @@ import {
   SubjectPublicRoutes,
   SemesterPublicRoutes,
 } from "./routes/public";
+
 import DocumentPublicRoutes from "./routes/public/document/document";
 
 const expressLayouts = require("express-ejs-layouts");
@@ -41,12 +44,13 @@ var env = process.env.NODE_ENV || 'development';
 
 
 // app.use(express.static(path.join(__dirname, "public")));
-app.use('/static',express.static(path.join(__dirname, "public")));
+
 if(env === "development") {
-  app.use('/dynamic',express.static(path.join(__dirname, "dynamic")));
+  app.use('/static',express.static(path.join(__dirname, "public")));
 }else {
   app.use('/dynamic',express.static(path.join(__dirname, '..', "dynamic")));
 }
+
 // app.use(express.static(path.join(__dirname, "/dynamic")));
 
 app.get("/", (req: Request, res: Response) => {
