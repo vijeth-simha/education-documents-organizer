@@ -43,10 +43,10 @@ app.use(express.urlencoded({ extended: true }));
 var env = process.env.NODE_ENV || 'development';
 
 
-// app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 if(env === "development") {
-  app.use('/static',express.static(path.join(__dirname, "public")));
+  // app.use('/static',express.static(path.join(__dirname, "public")));
 }else {
   app.use('/dynamic',express.static(path.join(__dirname, '..', "dynamic")));
 }
