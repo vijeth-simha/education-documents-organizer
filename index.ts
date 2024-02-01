@@ -39,8 +39,6 @@ app.use(expressLayouts);
 app.use(express.urlencoded({ extended: true }));
 var env = process.env.NODE_ENV || 'development';
 
-console.log(env);
-
 
 // app.use(express.static(path.join(__dirname, "public")));
 app.use('/static',express.static(path.join(__dirname, "public")));
