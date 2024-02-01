@@ -8,7 +8,7 @@ const SubjectAPIRoutes = Router();
 const multer  = require('multer')
 const storage = multer.diskStorage({
   destination:(req:Request, file:File, cb:any)=>{
-    cb(null, './public/img/subject-images')
+    cb(null, './dynamic/subject-images')
   },
   filename:function (req:Request, file:FileType, cb:any) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)

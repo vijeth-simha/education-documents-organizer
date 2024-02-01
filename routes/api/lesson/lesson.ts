@@ -8,7 +8,7 @@ const LessonAPIRoutes = Router();
 const multer = require("multer");
 const storage = multer.diskStorage({
   destination: (req: Request, file: File, cb: any) => {
-    cb(null, "./public/img/lesson-images");
+    cb(null, "./dynamic/lesson-images");
   },
   filename: function (req: Request, file: FileType, cb: any) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
