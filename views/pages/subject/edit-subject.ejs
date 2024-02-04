@@ -53,7 +53,7 @@
                         <select name="semesterId" class="form-control">
                         <option>choose below</option>
                         <% semestersList.forEach(semester => { %>
-                        <option value="<%-semester.id %>" <%= semester.id ===subject.id ? 'selected': "" %> >
+                        <option value="<%-semester.id %>" <%= semester.id === subject.semesterId ? 'selected': "" %> >
                           <%- semester.title %>
                         </option>
                         <%})%>

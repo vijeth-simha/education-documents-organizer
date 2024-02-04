@@ -55,7 +55,7 @@
                         <select name="categoryId" class="form-control">
                         <option>choose below</option>
                         <% categoriesList.forEach(category => { %>
-                        <option value="<%-category.id %>" <%= category.id ===semester.id ? 'selected': "" %>>
+                        <option value="<%-category.id %>" <%= category.id === semester.categoryId ? 'selected': "" %>>
                           <%- category.title %>
                         </option>
                         <%})%>

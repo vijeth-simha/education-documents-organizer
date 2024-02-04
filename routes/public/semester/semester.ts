@@ -29,7 +29,7 @@ SemesterPublicRoutes.get(
     const categories: Category[] = await categoryRepository.find();
     const semester: Semester | null = await semesterRepository.findOneBy({
       id: Number(id),
-    });
+    });    
     res.render("pages/semester/edit-semester", {semester, categoriesList: categories });
   }
 );
