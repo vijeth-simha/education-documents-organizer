@@ -13,3 +13,5 @@ To organize documents for students for their respective education which maybe MB
 # About The Project
 
 This project provides a comprehensive framework for storing your education documents efficiently.
+
+Need to update the docs.
